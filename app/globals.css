@@ -181,7 +181,7 @@ body::after {
 .cap-section { padding: var(--space-xl) var(--px); }
 .cap-section__title { font-family: var(--display); font-size: clamp(36px, 6vw, 72px); color: var(--text-1); font-weight: 600; line-height: 1.05; letter-spacing: -0.035em; margin: 16px 0 60px; max-width: 900px; font-variation-settings: "opsz" 96; }
 .cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--rule); }
-.cap-card { padding: clamp(28px, 3vw, 48px) clamp(20px, 2vw, 32px); border-right: 1px solid var(--rule); transition: background 0.4s; }
+.cap-card { display: block; height: 100%; padding: clamp(28px, 3vw, 48px) clamp(20px, 2vw, 32px); border-right: 1px solid var(--rule); transition: background 0.4s; }
 .cap-card:last-child { border-right: none; }
 .cap-card:hover { background: var(--bg2); }
 .cap-card__top { display: flex; justify-content: space-between; align-items: center; }
