@@ -31,7 +31,7 @@ export default function Testimonials({ items }) {
               <span style={{ color: "var(--accent)" }}>&rdquo;</span>
             </blockquote>
             <div className="testimonial__author">
-              <div className="testimonial__avatar" />
+              <div className="testimonial__avatar">{(t.author || "").trim().charAt(0).toUpperCase()}</div>
               <div>
                 <div style={{ color: "var(--text-1)", fontSize: 15, fontWeight: 500 }}>{t.author}</div>
                 {t.company && (
@@ -48,6 +48,8 @@ export default function Testimonials({ items }) {
             key={i}
             data-cursor=""
             onClick={() => setIdx(i)}
+            aria-label={`Show testimonial ${i + 1} of ${items.length}`}
+            aria-current={i === idx}
             className={`testimonial-dot ${i === idx ? "testimonial-dot--active" : ""}`}
           />
         ))}

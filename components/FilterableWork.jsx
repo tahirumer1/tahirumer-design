@@ -28,11 +28,17 @@ export default function FilterableWork({ projects, showCounts = false, limit }) 
           );
         })}
       </div>
-      <div className="proj-grid">
-        {filtered.map((p, i) => (
-          <ProjectCard key={p._id || p.slug} project={p} index={i} />
-        ))}
-      </div>
+      {filtered.length === 0 ? (
+        <p style={{ color: "var(--text-3)", fontFamily: "var(--mono)", fontSize: 13, letterSpacing: "0.04em", padding: "48px 0" }}>
+          No projects in this category yet — check back soon.
+        </p>
+      ) : (
+        <div className="proj-grid">
+          {filtered.map((p, i) => (
+            <ProjectCard key={p._id || p.slug} project={p} index={i} />
+          ))}
+        </div>
+      )}
     </>
   );
 }

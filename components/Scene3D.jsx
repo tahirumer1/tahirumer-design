@@ -25,11 +25,11 @@ export default function Scene3D() {
 
     const geo1 = new THREE.TorusKnotGeometry(1.3, 0.08, 240, 16, 2, 3);
     const mat1 = new THREE.MeshStandardMaterial({
-      color: 0xd4ff00,
+      color: 0x9d4ef4,
       metalness: 0.7,
       roughness: 0.2,
-      emissive: 0xd4ff00,
-      emissiveIntensity: 0.25,
+      emissive: 0x9d4ef4,
+      emissiveIntensity: 0.42,
     });
     const knot = new THREE.Mesh(geo1, mat1);
     scene.add(knot);
@@ -50,7 +50,7 @@ export default function Scene3D() {
     for (let i = 0; i < dotCount * 3; i++) positions[i] = (Math.random() - 0.5) * 10;
     dotGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     const dotMat = new THREE.PointsMaterial({
-      color: 0xd4ff00,
+      color: 0x9d4ef4,
       size: 0.025,
       transparent: true,
       opacity: 0.5,
@@ -62,7 +62,7 @@ export default function Scene3D() {
     keyLight.position.set(3, 3, 5);
     scene.add(keyLight);
 
-    const rimLight = new THREE.DirectionalLight(0xd4ff00, 1.0);
+    const rimLight = new THREE.DirectionalLight(0x9d4ef4, 1.0);
     rimLight.position.set(-3, 2, -2);
     scene.add(rimLight);
 
@@ -100,7 +100,14 @@ export default function Scene3D() {
       dots.rotation.x = t * 0.01;
       renderer.render(scene, camera);
     };
-    animate();
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) {
+      renderer.render(scene, camera);
+    } else {
+      animate();
+    }
 
     return () => {
       cancelAnimationFrame(raf);

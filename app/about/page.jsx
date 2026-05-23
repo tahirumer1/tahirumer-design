@@ -31,10 +31,23 @@ export default async function AboutPage() {
       </R>
 
       <R d={0.2}>
-        <div style={{ marginTop: "var(--space-lg)", aspectRatio: "2.2/1", borderRadius: 4, background: "linear-gradient(135deg, #141414, #1a1a1a)", border: "1px solid var(--rule)", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 30% 50%, rgba(212,255,0,0.06), transparent 60%)" }} />
-          <span className="mono" style={{ color: "var(--text-3)", fontSize: 12, position: "relative" }}>Your photograph</span>
-        </div>
+        <div
+          role="img"
+          aria-label="Tahir Umer"
+          style={{
+            marginTop: "var(--space-lg)",
+            aspectRatio: "1 / 1",
+            width: "100%",
+            maxWidth: 480,
+            borderRadius: 8,
+            border: "1px solid var(--rule)",
+            overflow: "hidden",
+            backgroundColor: "var(--accent-deep)",
+            backgroundImage: "url(/tahir.png)",
+            backgroundSize: "cover",
+            backgroundPosition: "center top",
+          }}
+        />
       </R>
 
       <div style={{ marginTop: "var(--space-xl)", maxWidth: 680 }}>

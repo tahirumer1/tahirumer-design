@@ -24,17 +24,31 @@ export default function FAQ({ items }) {
         {items.map((f, i) => (
           <div key={f._id}>
             <R d={0.05 * i}>
-              <div className="faq-row" data-cursor="" onClick={() => setOpen(open === i ? null : i)}>
-                <div className="faq-row__head">
-                  <span className="mono" style={{ color: "var(--text-3)", fontSize: 11 }}>
-                    0{i + 1}
-                  </span>
-                  <h3 className="faq-row__q">{f.question}</h3>
-                  <span className={`faq-row__toggle ${open === i ? "faq-row__toggle--open" : ""}`}>
-                    <span /><span />
-                  </span>
-                </div>
-                <div className={`faq-row__body ${open === i ? "faq-row__body--open" : ""}`}>
+              <div className="faq-row">
+                <h3 style={{ margin: 0 }}>
+                  <button
+                    className="faq-row__head"
+                    onClick={() => setOpen(open === i ? null : i)}
+                    aria-expanded={open === i}
+                    aria-controls={`faq-body-${i}`}
+                    id={`faq-head-${i}`}
+                    style={{ width: "100%", textAlign: "left", padding: 0 }}
+                  >
+                    <span className="mono" style={{ color: "var(--text-3)", fontSize: 11 }}>
+                      0{i + 1}
+                    </span>
+                    <span className="faq-row__q">{f.question}</span>
+                    <span className={`faq-row__toggle ${open === i ? "faq-row__toggle--open" : ""}`}>
+                      <span /><span />
+                    </span>
+                  </button>
+                </h3>
+                <div
+                  id={`faq-body-${i}`}
+                  role="region"
+                  aria-labelledby={`faq-head-${i}`}
+                  className={`faq-row__body ${open === i ? "faq-row__body--open" : ""}`}
+                >
                   <p>{f.answer}</p>
                 </div>
               </div>

@@ -57,14 +57,9 @@ export const project = {
     },
     {
       name: "thumbnail",
-      title: "Thumbnail Image",
+      title: "Thumbnail (work grid card)",
       type: "image",
-      options: { hotspot: true },
-    },
-    {
-      name: "heroImage",
-      title: "Hero Image (case study)",
-      type: "image",
+      description: "Cover image shown on the Work grid. Recommended ~1600×1200.",
       options: { hotspot: true },
     },
     {
@@ -122,10 +117,11 @@ export const project = {
       rows: 4,
     },
     {
-      name: "gallery",
-      title: "Gallery Images",
+      name: "detailImages",
+      title: "Case Study Images (long / Behance-style)",
       type: "array",
       of: [{ type: "image", options: { hotspot: true } }],
+      description: "Full case-study visuals for the detail page — shown full-width, stacked top to bottom. Upload one long/tall image (Behance-style) or several.",
     },
   ],
   orderings: [

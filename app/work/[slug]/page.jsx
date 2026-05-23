@@ -7,7 +7,6 @@ import {
   getProjectBySlug,
   getProjectSlugs,
   getSiteSettings,
-  colorToGradient,
 } from "@/lib/queries";
 
 export const revalidate = 60;
@@ -38,10 +37,6 @@ export default async function CaseStudyPage({ params }) {
   const currentIdx = allProjects.findIndex((x) => x.slug === params.slug);
   const next = allProjects[(currentIdx + 1) % allProjects.length];
 
-  const heroBg = p.heroImageUrl
-    ? `url(${p.heroImageUrl})`
-    : colorToGradient(p.accentColor);
-
   return (
     <main className="page-pad">
       <R>
@@ -71,15 +66,21 @@ export default async function CaseStudyPage({ params }) {
         </div>
       </R>
 
-      <R d={0.15}>
-        <div className="cs-hero-img" style={{ background: heroBg }}>
-          {!p.heroImageUrl && (
-            <span style={{ fontFamily: "var(--display)", fontSize: "clamp(60px,14vw,200px)", fontWeight: 700, opacity: 0.1, color: "var(--text-1)", letterSpacing: "-0.04em" }}>
-              {p.title}
-            </span>
-          )}
+      {p.detailImageUrls?.length > 0 && (
+        <div className="cs-shots">
+          {p.detailImageUrls.map((url, i) => (
+            <R key={i}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${url}?w=1600&auto=format&fit=max`}
+                alt={`${p.title} — image ${i + 1}`}
+                className="cs-shot"
+                loading="lazy"
+              />
+            </R>
+          ))}
         </div>
-      </R>
+      )}
 
       {p.challenge && (
         <div className="cs-section">
@@ -130,22 +131,6 @@ export default async function CaseStudyPage({ params }) {
             </R>
           ))}
         </div>
-      )}
-
-      {p.galleryUrls?.length > 0 ? (
-        p.galleryUrls.map((url, i) => (
-          <R key={i}>
-            <div className="cs-mid-img" style={{ background: `url(${url})` }} />
-          </R>
-        ))
-      ) : (
-        <R>
-          <div className="cs-mid-img" style={{ background: colorToGradient(p.accentColor) }}>
-            <span className="mono" style={{ fontSize: 13, color: "var(--text-3)", fontStyle: "italic" }}>
-              [ Project screens & artifacts ]
-            </span>
-          </div>
-        </R>
       )}
 
       {p.outcome && (

@@ -91,7 +91,7 @@ export default async function HomePage() {
             { n: "03", t: "Development", desc: "WordPress development — from theme customization to custom builds.", items: ["Custom Themes", "Elementor", "Domain & Hosting", "CMS Setup", "Performance"] },
           ].map((c, i) => (
             <R key={i} d={0.12 * i}>
-              <div className="cap-card">
+              <Link href="/services" className="cap-card" data-cursor="explore">
                 <div className="cap-card__top">
                   <span className="mono cap-card__num">{c.n}</span>
                   <span className="cap-card__arrow">↗</span>
@@ -101,7 +101,7 @@ export default async function HomePage() {
                 <div className="cap-card__items">
                   {c.items.map((it) => <span key={it} className="cap-card__item mono">{it}</span>)}
                 </div>
-              </div>
+              </Link>
             </R>
           ))}
         </div>

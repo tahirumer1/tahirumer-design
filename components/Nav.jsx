@@ -44,12 +44,18 @@ export default function Nav() {
             <span className="nav__cta-dot" />Available
           </Link>
         </div>
-        <button className={`nav__burger ${mOpen ? "nav__burger--open" : ""}`} onClick={() => setMOpen(!mOpen)}>
+        <button
+          className={`nav__burger ${mOpen ? "nav__burger--open" : ""}`}
+          onClick={() => setMOpen(!mOpen)}
+          aria-label={mOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mOpen}
+          aria-controls="mobile-menu"
+        >
           <span /><span />
         </button>
       </nav>
 
-      <div className={`mobile-menu ${mOpen ? "mobile-menu--open" : ""}`}>
+      <div id="mobile-menu" className={`mobile-menu ${mOpen ? "mobile-menu--open" : ""}`}>
         {[["/", "Home"], ...LINKS].map(([href, label], i) => (
           <Link key={href} href={href} className="mobile-menu__link" style={{ transitionDelay: mOpen ? `${0.08 * i}s` : "0s" }}>
             <span className="mono" style={{ color: "var(--accent)", fontSize: 12 }}>0{i + 1}</span>

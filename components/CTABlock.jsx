@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { R, LineReveal } from "./Reveals";
 
-export default function CTABlock({ email = "hello@tahirumer.design" }) {
+export default function CTABlock({ email = "iamtahirumer@gmail.com" }) {
   return (
     <section className="cta-block">
       <R>
