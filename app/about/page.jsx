@@ -6,11 +6,11 @@ export const metadata = { title: "About — Tahir Umer" };
 export const revalidate = 60;
 
 export default async function AboutPage() {
-  const { settings, about } = await getSiteContent();
+  const { about, labels } = await getSiteContent();
 
   return (
     <main className="page-pad">
-      <R><span className="mono" style={{ color: "var(--accent)", fontSize: 12 }}>002 / About</span></R>
+      <R><span className="mono" style={{ color: "var(--accent)", fontSize: 12 }}>002 / {labels.about}</span></R>
       <R d={0.1}><h1 className="page-title" style={{ maxWidth: 800 }}>{about.headline}</h1></R>
       <R d={0.15}>
         <p style={{ fontFamily: "var(--display)", fontSize: "clamp(22px,3.2vw,36px)", color: "var(--text-2)", lineHeight: 1.4, maxWidth: 720, fontWeight: 400, marginTop: 12, letterSpacing: "-0.02em" }}>
@@ -39,7 +39,7 @@ export default async function AboutPage() {
       </R>
 
       <div style={{ marginTop: "var(--space-xl)", maxWidth: 680 }}>
-        <R><span className="mono section-head__label">My Story</span></R>
+        <R><span className="mono section-head__label">{labels.story}</span></R>
         <R d={0.05}><LineReveal /></R>
         {about.story.map((t, i) => (
           <R key={i} d={0.08 * i}>
@@ -49,7 +49,7 @@ export default async function AboutPage() {
       </div>
 
       <div style={{ marginTop: "var(--space-xl)" }}>
-        <R><span className="mono section-head__label">Philosophy</span></R>
+        <R><span className="mono section-head__label">{labels.philosophy}</span></R>
         <R d={0.05}><LineReveal /></R>
         <div style={{ marginTop: 40, display: "flex", flexDirection: "column", gap: 40 }}>
           {about.philosophy.map((p, i) => (
@@ -64,14 +64,14 @@ export default async function AboutPage() {
       </div>
 
       <div style={{ marginTop: "var(--space-xl)", maxWidth: 600 }}>
-        <R><span className="mono section-head__label">Beyond the Screen</span></R>
+        <R><span className="mono section-head__label">{labels.beyond}</span></R>
         <R d={0.05}><LineReveal /></R>
         <R d={0.1}>
           <p className="body-text" style={{ marginTop: 32 }}>{about.beyondScreen}</p>
         </R>
       </div>
 
-      <CTABlock email={settings.email} />
+      <CTABlock />
     </main>
   );
 }

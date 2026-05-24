@@ -23,7 +23,7 @@ export default async function HomePage() {
     getFaqs(),
     getSiteContent(),
   ]);
-  const { settings, home } = content;
+  const { settings, home, labels, headings } = content;
 
   return (
     <main>
@@ -38,7 +38,7 @@ export default async function HomePage() {
 
       <section className="about-strip">
         <div className="about-strip__grid">
-          <R><span className="mono section-head__label">About</span></R>
+          <R><span className="mono section-head__label">{labels.about}</span></R>
           <R d={0.1}>
             <p className="about-strip__text"><Accent>{settings.aboutIntro}</Accent></p>
           </R>
@@ -48,16 +48,16 @@ export default async function HomePage() {
       <section id="work-section" className="work-section">
         <R>
           <div className="section-head">
-            <span className="mono section-head__label">Selected Work</span>
-            <Link href="/work" data-cursor="" className="section-head__link">View Archive →</Link>
+            <span className="mono section-head__label">{labels.work}</span>
+            <Link href="/work" data-cursor="" className="section-head__link">{labels.viewArchive}</Link>
           </div>
         </R>
         <LineReveal d={0.15} />
-        <FilterableWork projects={projects} limit={4} />
+        <FilterableWork projects={projects} limit={4} emptyMessage={content.work.empty} />
       </section>
 
       <section className="quote-section">
-        <R><span className="mono section-head__label">Philosophy</span></R>
+        <R><span className="mono section-head__label">{labels.philosophy}</span></R>
         <R d={0.1}>
           <blockquote className="pull-quote"><Accent>{home.philosophyQuote}</Accent></blockquote>
         </R>
@@ -82,7 +82,7 @@ export default async function HomePage() {
       </section>
 
       <section className="cap-section">
-        <R><span className="mono section-head__label">Capabilities</span></R>
+        <R><span className="mono section-head__label">{labels.capabilities}</span></R>
         <R d={0.1}>
           <h2 className="cap-section__title"><Accent>{home.capHeading}</Accent></h2>
         </R>
@@ -118,9 +118,9 @@ export default async function HomePage() {
         </div>
       </div>
 
-      <Testimonials items={testimonials} />
-      <FAQ items={faqs} />
-      <CTABlock email={settings.email} />
+      <Testimonials items={testimonials} label={labels.testimonials} heading={headings.testimonials} />
+      <FAQ items={faqs} label={labels.faq} heading={headings.faq} />
+      <CTABlock />
     </main>
   );
 }

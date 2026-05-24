@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { R, LineReveal } from "./Reveals";
+import Accent from "./Accent";
 
-export default function FAQ({ items }) {
+export default function FAQ({ items, label = "Frequently Asked", heading = "Answers to the *common questions*." }) {
   const [open, setOpen] = useState(null);
   if (!items?.length) return null;
 
@@ -11,13 +12,11 @@ export default function FAQ({ items }) {
     <section className="faq-section">
       <R>
         <div className="section-head">
-          <span className="mono section-head__label">Frequently Asked</span>
+          <span className="mono section-head__label">{label}</span>
         </div>
       </R>
       <R d={0.1}>
-        <h2 className="faq-section__title">
-          Answers to the <em>common questions</em>.
-        </h2>
+        <h2 className="faq-section__title"><Accent>{heading}</Accent></h2>
       </R>
       <LineReveal d={0.2} />
       <div>
@@ -34,9 +33,7 @@ export default function FAQ({ items }) {
                     id={`faq-head-${i}`}
                     style={{ width: "100%", textAlign: "left", padding: 0 }}
                   >
-                    <span className="mono" style={{ color: "var(--text-3)", fontSize: 11 }}>
-                      0{i + 1}
-                    </span>
+                    <span className="mono" style={{ color: "var(--text-3)", fontSize: 11 }}>0{i + 1}</span>
                     <span className="faq-row__q">{f.question}</span>
                     <span className={`faq-row__toggle ${open === i ? "faq-row__toggle--open" : ""}`}>
                       <span /><span />

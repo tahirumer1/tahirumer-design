@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { R, LineReveal } from "./Reveals";
+import Accent from "./Accent";
 
-export default function Testimonials({ items }) {
+export default function Testimonials({ items, label = "Kind Words", heading = "Thoughts from *people I've worked with*." }) {
   const [idx, setIdx] = useState(0);
   useEffect(() => {
     if (!items?.length) return;
@@ -15,11 +16,9 @@ export default function Testimonials({ items }) {
 
   return (
     <section className="testimonial-section">
-      <R><span className="mono section-head__label">Kind Words</span></R>
+      <R><span className="mono section-head__label">{label}</span></R>
       <R d={0.1}>
-        <h2 className="testimonial-section__title">
-          Thoughts from <em>people I've worked with</em>.
-        </h2>
+        <h2 className="testimonial-section__title"><Accent>{heading}</Accent></h2>
       </R>
       <LineReveal d={0.2} />
       <div className="testimonial-stage">

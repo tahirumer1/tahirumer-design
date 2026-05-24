@@ -5,7 +5,7 @@ import ProjectCard from "./ProjectCard";
 
 const CATEGORIES = ["All", "UI/UX", "Graphic", "Development"];
 
-export default function FilterableWork({ projects, showCounts = false, limit }) {
+export default function FilterableWork({ projects, showCounts = false, limit, emptyMessage = "No projects in this category yet — check back soon." }) {
   const [cat, setCat] = useState("All");
   let filtered = cat === "All" ? projects : projects.filter((p) => p.category === cat);
   if (limit) filtered = filtered.slice(0, limit);
@@ -30,7 +30,7 @@ export default function FilterableWork({ projects, showCounts = false, limit }) 
       </div>
       {filtered.length === 0 ? (
         <p style={{ color: "var(--text-3)", fontFamily: "var(--mono)", fontSize: 13, letterSpacing: "0.04em", padding: "48px 0" }}>
-          No projects in this category yet — check back soon.
+          {emptyMessage}
         </p>
       ) : (
         <div className="proj-grid">

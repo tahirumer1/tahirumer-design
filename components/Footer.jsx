@@ -1,14 +1,10 @@
 import Link from "next/link";
 import LiveClock from "./LiveClock";
-import { getSiteSettings } from "@/lib/queries";
+import { getSiteContent } from "@/lib/queries";
 
 export default async function Footer() {
-  const settings = await getSiteSettings();
-  const social = settings.socialLinks || [
-    { platform: "Dribbble", url: "#" },
-    { platform: "LinkedIn", url: "#" },
-    { platform: "Behance", url: "#" },
-  ];
+  const { settings, footer } = await getSiteContent();
+  const social = settings.socialLinks || [];
 
   return (
     <footer className="footer">
@@ -18,7 +14,7 @@ export default async function Footer() {
             tahir<br /><span className="accent">umer.</span>
           </Link>
           <p className="mono" style={{ color: "var(--text-3)", fontSize: 12, marginTop: 24, maxWidth: 280, lineHeight: 1.7 }}>
-            Designing products that perform. Based in Lahore, working with clients globally.
+            {footer.tagline}
           </p>
         </div>
         <div className="footer__cols">
@@ -48,8 +44,8 @@ export default async function Footer() {
         </div>
       </div>
       <div className="footer__bottom">
-        <span className="mono">© 2026 TAHIR UMER · ALL RIGHTS RESERVED</span>
-        <span className="mono">DESIGNED & BUILT WITH CARE</span>
+        <span className="mono">{footer.copyright}</span>
+        <span className="mono">{footer.note}</span>
       </div>
     </footer>
   );
