@@ -4,7 +4,14 @@ import { useState, useEffect } from "react";
 import Scene3D from "./Scene3D";
 import LiveClock from "./LiveClock";
 
-export default function HomeHero({ tagline }) {
+export default function HomeHero({
+  tagline,
+  line1 = "I design digital",
+  line2 = "products that",
+  emphasis = "perform.",
+  label = "UI/UX Designer · 10+ Years · Product‑Focused",
+  ticker = [],
+}) {
   const [ready, setReady] = useState(false);
   useEffect(() => { setTimeout(() => setReady(true), 150); }, []);
 
@@ -12,19 +19,17 @@ export default function HomeHero({ tagline }) {
     document.getElementById("work-section")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Render each word in its own reveal mask, with real spaces between them.
-  // (Adjacent inline-block spans collapse whitespace, so the spaces must be
-  // explicit text nodes between the masks — otherwise the words run together.)
+  const labelItems = String(label).split("·").map((s) => s.trim()).filter(Boolean);
+  const tickerItems = ticker.length
+    ? ticker
+    : ["● AVAILABLE FOR SELECT PROJECTS", "● 2026 BOOKINGS OPEN", "● INTERNATIONAL CLIENTS WELCOME", "● BASED IN LAHORE · WORKING GLOBALLY"];
+
+  // Each word in its own reveal mask, with real spaces between (so words don't run together).
   const words = (text, baseDelay) =>
-    text.split(" ").flatMap((w, i) => {
+    String(text).split(" ").filter(Boolean).flatMap((w, i) => {
       const span = (
         <span key={`${baseDelay}-${i}`} className="hero__word">
-          <span
-            className={`hero__word-inner ${ready ? "in" : ""}`}
-            style={{ transitionDelay: `${baseDelay + i * 0.08}s` }}
-          >
-            {w}
-          </span>
+          <span className={`hero__word-inner ${ready ? "in" : ""}`} style={{ transitionDelay: `${baseDelay + i * 0.08}s` }}>{w}</span>
         </span>
       );
       return i === 0 ? [span] : [" ", span];
@@ -36,25 +41,19 @@ export default function HomeHero({ tagline }) {
       <div className="hero__content">
         <div className="hero__label">
           <span className={`hero__label-line ${ready ? "in" : ""}`}>
-            <span className="mono">UI/UX Designer</span>
-            <span className="hero__label-rule" />
-            <span className="mono">10+ Years</span>
-            <span className="hero__label-rule" />
-            <span className="mono">Product‑Focused</span>
+            {labelItems.flatMap((item, i) => {
+              const el = <span key={`l${i}`} className="mono">{item}</span>;
+              return i === 0 ? [el] : [<span key={`r${i}`} className="hero__label-rule" />, el];
+            })}
           </span>
         </div>
         <h1 className="hero__title">
-          {words("I design digital", 0.15)}
+          {words(line1, 0.15)}
           <br />
-          {words("products that", 0.45)}
+          {words(line2, 0.45)}
           {" "}
           <em className="hero__word">
-            <span
-              className={`hero__word-inner ${ready ? "in" : ""}`}
-              style={{ transitionDelay: "0.62s" }}
-            >
-              perform.
-            </span>
+            <span className={`hero__word-inner ${ready ? "in" : ""}`} style={{ transitionDelay: "0.62s" }}>{emphasis}</span>
           </em>
         </h1>
       </div>
@@ -77,10 +76,7 @@ export default function HomeHero({ tagline }) {
         <div className="hero__ticker-inner">
           {Array(4).fill(null).map((_, j) => (
             <span key={j} className="hero__ticker-text">
-              <span>● AVAILABLE FOR SELECT PROJECTS</span>
-              <span>● 2026 BOOKINGS OPEN</span>
-              <span>● INTERNATIONAL CLIENTS WELCOME</span>
-              <span>● BASED IN LAHORE · WORKING GLOBALLY</span>
+              {tickerItems.map((t, k) => <span key={k}>{t}</span>)}
             </span>
           ))}
         </div>
