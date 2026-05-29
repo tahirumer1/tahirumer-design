@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { R, LineReveal } from "@/components/Reveals";
 import CTABlock from "@/components/CTABlock";
+import DemoEmbed from "@/components/DemoEmbed";
 import {
   getAllProjects,
   getProjectBySlug,
@@ -65,6 +66,22 @@ export default async function CaseStudyPage({ params }) {
           )}
         </div>
       </R>
+
+      {p.demoUrl && (
+        <R d={0.32}>
+          <DemoEmbed src={p.demoUrl} poster={p.thumbnailUrl} title={p.title} accent={p.accentColor} />
+          {p.description && (
+            <p className="cs-section__body" style={{ marginTop: 28, maxWidth: 760 }}>{p.description}</p>
+          )}
+          {p.roleTags?.length > 0 && (
+            <div className="cs-demo__tags">
+              {p.roleTags.map((t) => (
+                <span key={t} className="cs-demo__tag">{t}</span>
+              ))}
+            </div>
+          )}
+        </R>
+      )}
 
       {p.detailImageUrls?.length > 0 && (
         <div className="cs-shots">

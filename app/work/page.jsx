@@ -23,7 +23,7 @@ export default async function WorkPage() {
           viewport, so the whole grid would stay hidden. Each ProjectCard
           already self-reveals on scroll. */}
       <div style={{ marginTop: "var(--space-md)" }}>
-        <FilterableWork projects={projects} showCounts emptyMessage={work.empty} />
+        <FilterableWork projects={projects} showCounts syncUrl emptyMessage={work.empty} />
       </div>
 
       <CTABlock />
