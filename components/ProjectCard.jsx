@@ -7,9 +7,12 @@ import { colorToGradient } from "@/lib/queries";
 export default function ProjectCard({ project, index = 0 }) {
   const [ref, vis] = useReveal();
   const num = String(index + 1).padStart(2, "0");
-  const bg = project.thumbnailUrl
-    ? `url(${project.thumbnailUrl})`
-    : colorToGradient(project.accentColor);
+  // Use `backgroundImage` (NOT the `background` shorthand) for thumbnails so the
+  // CSS class's `background-size: cover` + `background-position` are preserved.
+  // The shorthand resets those to `auto` / `0% 0%`, which showed a 1:1 top-left crop.
+  const imgStyle = project.thumbnailUrl
+    ? { backgroundImage: `url(${project.thumbnailUrl})` }
+    : { background: colorToGradient(project.accentColor) };
 
   return (
     <div
@@ -21,7 +24,7 @@ export default function ProjectCard({ project, index = 0 }) {
       }}
     >
       <Link href={`/work/${project.slug}`} className="proj-card" data-cursor="view">
-        <div className="proj-card__img" style={{ background: bg }}>
+        <div className="proj-card__img" style={imgStyle}>
           <span className="mono proj-card__num">{num}</span>
           {!project.thumbnailUrl && (
             <span className="proj-card__letter">
