@@ -18,10 +18,12 @@ export default async function WorkPage() {
         <p className="page-sub">{work.sub}</p>
       </R>
 
+      {/* NOTE: do NOT wrap FilterableWork in <R>. Its IntersectionObserver
+          (threshold 0.18) never fires for a section taller than ~5x the
+          viewport, so the whole grid would stay hidden. Each ProjectCard
+          already self-reveals on scroll. */}
       <div style={{ marginTop: "var(--space-md)" }}>
-        <R d={0.3}>
-          <FilterableWork projects={projects} showCounts emptyMessage={work.empty} />
-        </R>
+        <FilterableWork projects={projects} showCounts emptyMessage={work.empty} />
       </div>
 
       <CTABlock />
