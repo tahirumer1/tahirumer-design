@@ -1,6 +1,7 @@
 import { R, LineReveal } from "@/components/Reveals";
 import CTABlock from "@/components/CTABlock";
 import { getSiteContent } from "@/lib/queries";
+import { EXPERIENCE, SKILL_GROUPS, TOOLS, EDUCATION, CERTIFICATIONS } from "@/lib/resume";
 
 export const metadata = { title: "About — Tahir Umer" };
 export const revalidate = 60;
@@ -46,6 +47,79 @@ export default async function AboutPage() {
             <p className="body-text" style={{ marginTop: i === 0 ? 32 : 20 }}>{t}</p>
           </R>
         ))}
+      </div>
+
+      {/* Experience */}
+      <div style={{ marginTop: "var(--space-xl)" }}>
+        <R><span className="mono section-head__label">Experience</span></R>
+        <R d={0.05}><LineReveal /></R>
+        <div className="exp-list">
+          {EXPERIENCE.map((e, i) => (
+            <R key={i} d={0.04 * Math.min(i, 4)}>
+              <div className="exp-item">
+                <div className="exp-item__head">
+                  <h3 className="exp-item__role">{e.role}</h3>
+                  <span className="mono exp-item__period">{e.period}</span>
+                </div>
+                <div className="mono exp-item__co">{e.company} · {e.location}</div>
+                <ul className="exp-item__bullets">
+                  {e.bullets.map((b, j) => (
+                    <li key={j} className="body-text">{b}</li>
+                  ))}
+                </ul>
+              </div>
+            </R>
+          ))}
+        </div>
+      </div>
+
+      {/* Skills & Tools */}
+      <div style={{ marginTop: "var(--space-xl)" }}>
+        <R><span className="mono section-head__label">Skills &amp; Tools</span></R>
+        <R d={0.05}><LineReveal /></R>
+        <div className="skills-grid">
+          {SKILL_GROUPS.map((g, i) => (
+            <R key={i} d={0.06 * i}>
+              <div className="skills-group">
+                <span className="mono skills-group__label">{g.group}</span>
+                <div className="skills-group__tags">
+                  {g.items.map((it) => (
+                    <span key={it} className="skill-tag">{it}</span>
+                  ))}
+                </div>
+              </div>
+            </R>
+          ))}
+        </div>
+        <R d={0.1}>
+          <div className="tools-row">
+            {TOOLS.map((t) => (
+              <div key={t.name} className="tool-chip">
+                <span className="tool-chip__name">{t.name}</span>
+                <span className="mono tool-chip__level">{t.level}</span>
+              </div>
+            ))}
+          </div>
+        </R>
+      </div>
+
+      {/* Education & Certifications */}
+      <div style={{ marginTop: "var(--space-xl)", maxWidth: 760 }}>
+        <R><span className="mono section-head__label">Education &amp; Certifications</span></R>
+        <R d={0.05}><LineReveal /></R>
+        <div className="edu-list">
+          {[...EDUCATION, ...CERTIFICATIONS].map((e, i) => (
+            <R key={i} d={0.05 * i}>
+              <div className="edu-item">
+                <span className="mono edu-item__year">{e.year}</span>
+                <div className="edu-item__body">
+                  <div className="edu-item__title">{e.title}</div>
+                  <div className="mono edu-item__org">{e.org}</div>
+                </div>
+              </div>
+            </R>
+          ))}
+        </div>
       </div>
 
       <div style={{ marginTop: "var(--space-xl)" }}>
