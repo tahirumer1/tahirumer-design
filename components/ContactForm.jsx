@@ -116,7 +116,7 @@ export default function ContactForm({ contact, settings }) {
           <div>
             <span className="mono" style={{ color: "var(--text-3)", fontSize: 11 }}>Email</span>
             <div style={{ marginTop: 6 }}>
-              <a href={`mailto:${email}`} style={{ color: "var(--accent)", fontSize: 15 }}>{email}</a>
+              <a href={`mailto:${email}`} style={{ color: "var(--accent-text)", fontSize: 15 }}>{email}</a>
             </div>
           </div>
           <div>

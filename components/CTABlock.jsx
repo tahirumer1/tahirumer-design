@@ -23,7 +23,7 @@ export default async function CTABlock() {
             <span style={{ marginLeft: 10 }}>→</span>
           </Link>
           <div className="mono" style={{ fontSize: 12, color: "var(--text-3)", marginTop: 20 }}>
-            or email <span style={{ color: "var(--accent)" }}>{settings.email}</span>
+            or email <span style={{ color: "var(--accent-text)" }}>{settings.email}</span>
           </div>
         </div>
       </R>

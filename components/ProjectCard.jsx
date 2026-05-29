@@ -37,7 +37,7 @@ export default function ProjectCard({ project, index = 0 }) {
         </div>
         <div className="proj-card__info">
           <div className="proj-card__meta">
-            <span className="mono" style={{ color: project.accentColor || "var(--accent)" }}>{project.category}</span>
+            <span className="mono" style={{ color: "var(--accent-text)" }}>{project.category}</span>
             <span className="mono" style={{ color: "var(--text-3)" }}>{project.year}</span>
           </div>
           <h3 className="proj-card__title">{project.title}</h3>

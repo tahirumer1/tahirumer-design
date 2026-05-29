@@ -36,7 +36,7 @@ export default async function Footer() {
           </div>
           <div className="footer__col">
             <span className="mono footer__col-label">Contact</span>
-            <a href={`mailto:${settings.email}`} style={{ color: "var(--accent)" }}>{settings.email}</a>
+            <a href={`mailto:${settings.email}`} style={{ color: "var(--accent-text)" }}>{settings.email}</a>
             <span style={{ color: "var(--text-3)" }}>
               Lahore, PK · <LiveClock />
             </span>

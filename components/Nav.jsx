@@ -58,7 +58,7 @@ export default function Nav() {
       <div id="mobile-menu" className={`mobile-menu ${mOpen ? "mobile-menu--open" : ""}`}>
         {[["/", "Home"], ...LINKS].map(([href, label], i) => (
           <Link key={href} href={href} className="mobile-menu__link" style={{ transitionDelay: mOpen ? `${0.08 * i}s` : "0s" }}>
-            <span className="mono" style={{ color: "var(--accent)", fontSize: 12 }}>0{i + 1}</span>
+            <span className="mono" style={{ color: "var(--accent-text)", fontSize: 12 }}>0{i + 1}</span>
             {label}
           </Link>
         ))}

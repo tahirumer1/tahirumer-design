@@ -23,7 +23,7 @@ export default function ServicesList({ services }) {
                   id={`svc-head-${i}`}
                   style={{ width: "100%", textAlign: "left", padding: 0 }}
                 >
-                  <span className="mono" style={{ color: "var(--accent)" }}>{String(i + 1).padStart(2, "0")}</span>
+                  <span className="mono" style={{ color: "var(--accent-text)" }}>{String(i + 1).padStart(2, "0")}</span>
                   <span className="svc-row__title">{s.title}</span>
                   <span className={`svc-row__toggle ${open === i ? "svc-row__toggle--open" : ""}`}>+</span>
                 </button>
