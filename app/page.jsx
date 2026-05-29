@@ -25,6 +25,21 @@ export default async function HomePage() {
   ]);
   const { settings, home, labels, headings } = content;
 
+  // Curated homepage selection (in this exact order). Falls back to display order
+  // if any slug is missing so the section never renders empty.
+  const FEATURED_SLUGS = [
+    "asaichiban",
+    "flumii",
+    "ott-plus",
+    "untap",
+    "wise-market-ecommerce-design-system",
+    "zenith-go",
+  ];
+  const featuredProjects = FEATURED_SLUGS
+    .map((slug) => projects.find((p) => p.slug === slug))
+    .filter(Boolean);
+  const homeProjects = featuredProjects.length ? featuredProjects : projects.slice(0, 6);
+
   return (
     <main>
       <HomeHero
@@ -53,7 +68,7 @@ export default async function HomePage() {
           </div>
         </R>
         <LineReveal d={0.15} />
-        <FilterableWork projects={projects} limit={4} emptyMessage={content.work.empty} />
+        <FilterableWork projects={homeProjects} limit={6} emptyMessage={content.work.empty} />
       </section>
 
       <section className="quote-section">
