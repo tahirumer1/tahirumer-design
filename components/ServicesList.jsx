@@ -4,6 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { R, LineReveal } from "./Reveals";
 
+// Maps a service's CTA type to the matching /work category filter,
+// so each service can link straight to its relevant portfolio.
+const CTA_TO_CAT = { product: "ui-ux", brand: "graphic", web: "development" };
+
 export default function ServicesList({ services }) {
   const [open, setOpen] = useState(null);
 
@@ -41,15 +45,28 @@ export default function ServicesList({ services }) {
                   </div>
                 )}
                 {s.cta && (
-                  <Link
-                    href={`/contact?type=${s.ctaType || "other"}`}
-                    className="svc-cta"
-                    data-cursor="let's talk"
-                    tabIndex={open === i ? 0 : -1}
-                  >
-                    {s.cta}
-                    <span className="svc-cta__arrow" aria-hidden="true">→</span>
-                  </Link>
+                  <div className="svc-cta-row">
+                    <Link
+                      href={`/contact?type=${s.ctaType || "other"}`}
+                      className="svc-cta"
+                      data-cursor="let's talk"
+                      tabIndex={open === i ? 0 : -1}
+                    >
+                      {s.cta}
+                      <span className="svc-cta__arrow" aria-hidden="true">→</span>
+                    </Link>
+                    {CTA_TO_CAT[s.ctaType] && (
+                      <Link
+                        href={`/work?cat=${CTA_TO_CAT[s.ctaType]}`}
+                        className="svc-cta svc-cta--ghost"
+                        data-cursor="view"
+                        tabIndex={open === i ? 0 : -1}
+                      >
+                        View related work
+                        <span className="svc-cta__arrow" aria-hidden="true">↗</span>
+                      </Link>
+                    )}
+                  </div>
                 )}
               </div>
             </div>

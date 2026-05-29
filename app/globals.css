@@ -333,8 +333,11 @@ body::after {
 .svc-row__pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
 .svc-pill { font-family: var(--mono); font-size: 11px; color: var(--text-2); border: 1px solid var(--rule); border-radius: 100px; padding: 6px 14px; transition: border-color 0.3s, color 0.3s; font-weight: 500; }
 .svc-pill:hover { border-color: var(--accent); color: var(--text-1); }
-.svc-cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; background: var(--accent-deep); color: #fff; border-radius: 100px; padding: 12px 22px; font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.01em; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s; }
+.svc-cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 28px; }
+.svc-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-deep); color: #fff; border: 1px solid var(--accent-deep); border-radius: 100px; padding: 12px 22px; font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.01em; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s, border-color 0.3s, color 0.3s; }
 .svc-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(157,78,244,0.4); }
+.svc-cta--ghost { background: transparent; color: var(--text-1); border-color: var(--rule); }
+.svc-cta--ghost:hover { box-shadow: none; border-color: var(--accent-text); color: var(--text-1); }
 .svc-cta__arrow { transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
 .svc-cta:hover .svc-cta__arrow { transform: translateX(4px); }
 
