@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import ProjectCard from "./ProjectCard";
 
 const CATEGORIES = ["All", "UI/UX", "Graphic", "Development"];
@@ -29,8 +30,9 @@ export default function FilterableWork({ projects, showCounts = false, limit, em
     window.history.replaceState(null, "", url);
   };
 
-  let filtered = cat === "All" ? projects : projects.filter((p) => p.category === cat);
-  if (limit) filtered = filtered.slice(0, limit);
+  const inCat = cat === "All" ? projects : projects.filter((p) => p.category === cat);
+  const totalInCat = inCat.length;
+  const filtered = limit ? inCat.slice(0, limit) : inCat;
 
   return (
     <>
@@ -55,11 +57,25 @@ export default function FilterableWork({ projects, showCounts = false, limit, em
           {emptyMessage}
         </p>
       ) : (
-        <div className="proj-grid">
-          {filtered.map((p, i) => (
-            <ProjectCard key={p._id || p.slug} project={p} index={i} />
-          ))}
-        </div>
+        <>
+          <div className="proj-grid">
+            {filtered.map((p, i) => (
+              <ProjectCard key={p._id || p.slug} project={p} index={i} />
+            ))}
+          </div>
+          {limit && (
+            <div className="work-viewall">
+              <Link
+                href={`/work${CAT_TO_SLUG[cat] ? `?cat=${CAT_TO_SLUG[cat]}` : ""}`}
+                className="work-viewall__link mono"
+                data-cursor=""
+              >
+                {cat === "All" ? "View the full archive" : `View all ${totalInCat} ${cat} projects`}
+                <span aria-hidden="true"> →</span>
+              </Link>
+            </div>
+          )}
+        </>
       )}
     </>
   );
