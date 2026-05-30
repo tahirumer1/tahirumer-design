@@ -1,82 +1,177 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Doctrine — Demo: Coding Bootcamp</title><style>
-:root{--ink:#15130f;--ink-soft:#5c574e;--paper:#fbf9f4;--card:#ffffff;--line:#e9e4d8;
---brand:#0d9488;--brand-ink:#0b7c72;--accent:#f59e0b;--accent-soft:#fdebcf;--shell:#15130f;
---maxw:1180px;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
---serif:Georgia,'Iowan Old Style','Times New Roman',serif;}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forge Academy — Become a developer in 16 weeks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap"></noscript>
+<style>
+:root{
+  --bg:#0c0e0a;--bg2:#13160f;--panel:#171a12;--line:#262b1c;--text:#eef2e6;--muted:#9aa388;--muted2:#69715a;
+  --lime:#c4f135;--lime-d:#a6d320;--teal:#2dd4a7;
+  --disp:'Sora',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;--mono:'Space Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}html,body{overflow-x:hidden}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
-.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.1rem,4vw,2rem)}
-.serif{font-family:var(--serif);font-style:italic;font-weight:400}
-.eyebrow{font-size:.76rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--brand)}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.6rem;border-radius:12px;font-weight:600;font-size:.95rem;border:1px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s}
-.btn--primary{background:var(--brand);color:#fff}.btn--primary:hover{background:var(--brand-ink);transform:translateY(-2px)}
-.btn--ghost{background:transparent;border-color:currentColor;color:inherit}.btn--ghost:hover{transform:translateY(-2px)}
-.btn--light{background:#fff;color:var(--brand)}.btn--light:hover{transform:translateY(-2px)}
-h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:800}
-.nav{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav__in{display:flex;align-items:center;justify-content:space-between;height:68px}
-.brand{display:flex;align-items:center;gap:.55rem;font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
-.brand__dot{width:28px;height:28px;border-radius:8px;background:var(--brand);display:grid;place-items:center;color:#fff;font-family:var(--serif);font-size:1.1rem}
-.nav__links{display:flex;gap:1.8rem;font-size:.92rem;font-weight:500}.nav__links a:hover{color:var(--brand)}
-@media(max-width:860px){.nav__links{display:none}}
-.shead{max-width:640px;margin:0 auto 2.6rem;text-align:center}
-.shead h2{font-size:clamp(1.9rem,4vw,2.7rem);margin:.6rem 0 1rem}.shead h2 .serif{font-weight:400}.shead p{color:var(--ink-soft);font-size:1.05rem}
-.stats__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;text-align:center}
-.stat b{display:block;font-size:clamp(2rem,4vw,2.9rem);font-weight:800;letter-spacing:-.03em;color:var(--brand)}
-.stat span{color:var(--ink-soft);font-size:.9rem}
-@media(max-width:760px){.stats__grid{grid-template-columns:1fr 1fr;gap:1.6rem}}
-.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
-.tcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.7rem}
-.tcard__s{color:var(--accent);margin-bottom:.7rem}.tcard__q{margin-bottom:1.2rem}
-.tcard__by{display:flex;gap:.7rem;align-items:center}.tcard__av{width:40px;height:40px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-family:var(--serif)}
-.tcard__by b{display:block;font-size:.9rem}.tcard__by span{font-size:.8rem;color:var(--ink-soft)}
-@media(max-width:860px){.tgrid{grid-template-columns:1fr}}
-.foot{background:var(--shell);color:#fff;padding-block:3rem 1.8rem;margin-top:0}
-.foot__top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2rem}
-.foot__brand p{opacity:.7;font-size:.92rem;margin-top:.7rem;max-width:26ch}
-.foot__col h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;opacity:.6;margin-bottom:.9rem}
-.foot__col a{display:block;font-size:.92rem;margin-bottom:.5rem;opacity:.85}.foot__col a:hover{opacity:1}
-.foot__bot{margin-top:2.2rem;padding-top:1.3rem;border-top:1px solid rgba(255,255,255,.12);font-size:.84rem;opacity:.65}
-@media(max-width:760px){.foot__top{grid-template-columns:1fr 1fr}}
+.wrap{max-width:1140px;margin-inline:auto;padding-inline:24px}
+h1,h2,h3{font-family:var(--disp);line-height:1.05;letter-spacing:-.02em;font-weight:800}
+.tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--lime);background:rgba(196,241,53,.1);border:1px solid rgba(196,241,53,.3);padding:5px 12px;border-radius:6px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--disp);font-weight:700;font-size:15px;padding:13px 26px;border-radius:10px;cursor:pointer;border:2px solid transparent;transition:.18s}
+.btn-pri{background:var(--lime);color:#0c0e0a}.btn-pri:hover{background:var(--lime-d);transform:translateY(-2px)}
+.btn-line{border-color:var(--line);color:var(--text)}.btn-line:hover{border-color:var(--lime)}
+.nav{position:sticky;top:0;z-index:50;background:rgba(12,14,10,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;gap:32px;height:70px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:800;font-size:20px}
+.logo b{width:28px;height:28px;border-radius:8px;background:var(--lime);color:#0c0e0a;display:grid;place-items:center;font-size:17px}
+.nav__links{display:flex;gap:24px;font-size:14.5px;color:var(--muted)}.nav__links a:hover{color:var(--text)}
+.nav__right{margin-left:auto;display:flex;align-items:center;gap:15px}
+@media(max-width:880px){.nav__links{display:none}.nav__right a:first-child{display:none}}
+.hero{position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 50% 50% at 85% 5%,rgba(196,241,53,.12),transparent 60%)}
+.hero__in{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:46px;align-items:center;padding:66px 0 78px}
+.hero__in>*{min-width:0}
+.hero h1{font-size:clamp(42px,6vw,68px);margin:18px 0 18px}
+.hero h1 em{font-style:normal;color:var(--lime)}
+.hero p{font-size:17.5px;color:var(--muted);max-width:28em;margin-bottom:26px}
+.hero__cta{display:flex;gap:13px;flex-wrap:wrap}
+.hero__meta{margin-top:24px;display:flex;gap:26px;flex-wrap:wrap}
+.hero__meta b{font-family:var(--disp);font-size:24px;color:var(--lime);display:block}
+.hero__meta span{font-family:var(--mono);font-size:11.5px;color:var(--muted2)}
+/* roadmap */
+.road{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:0 40px 80px -40px rgba(0,0,0,.8)}
+.road h4{font-family:var(--mono);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:18px}
+.rstep{display:flex;gap:14px;padding-bottom:18px;position:relative}
+.rstep:last-child{padding-bottom:0}
+.rstep::before{content:"";position:absolute;left:13px;top:28px;bottom:0;width:2px;background:var(--line)}
+.rstep:last-child::before{display:none}
+.rstep .dot{width:28px;height:28px;border-radius:50%;flex:none;display:grid;place-items:center;font-family:var(--mono);font-size:12px;font-weight:700;z-index:1}
+.rstep.on .dot{background:var(--lime);color:#0c0e0a}
+.rstep .dot{background:var(--bg2);border:2px solid var(--line);color:var(--muted)}
+.rstep.on .dot{border-color:var(--lime)}
+.rstep b{font-family:var(--disp);font-size:15px;display:block}
+.rstep span{font-size:13px;color:var(--muted)}
+.rstep em{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted2);font-style:normal}
+.rstep div{flex:1}
+@media(max-width:880px){.hero__in{grid-template-columns:1fr;gap:38px;padding:46px 0 54px}}
+.logos{padding:26px 0;border-block:1px solid var(--line);text-align:center}
+.logos span{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2)}
+.logos__r{display:flex;justify-content:center;flex-wrap:wrap;gap:32px;margin-top:14px;font-family:var(--disp);font-weight:700;font-size:18px;color:#3a4030}
+.sec{padding:90px 0}
+.sec__head{max-width:600px;margin-bottom:46px}
+.sec__head h2{font-size:clamp(30px,4vw,46px);margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px}
+.f .ic{font-size:24px;margin-bottom:14px}
+.f h3{font-size:18px;margin-bottom:8px}.f p{font-size:14px;color:var(--muted)}
+@media(max-width:880px){.grid{grid-template-columns:1fr}}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.split__media{border-radius:16px;overflow:hidden;aspect-ratio:4/3;border:1px solid var(--line)}
+.split__media img{width:100%;height:100%;object-fit:cover}
+.split h2{font-size:clamp(28px,3.4vw,40px);margin-bottom:16px}
+.split p{color:var(--muted);font-size:16.5px;margin-bottom:20px}
+.split ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+.split li{display:flex;gap:11px;font-size:15px}.split li::before{content:"▹";color:var(--lime);font-weight:700}
+@media(max-width:880px){.split{grid-template-columns:1fr;gap:32px}}
+.nums{border-block:1px solid var(--line);padding:60px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.nums b{display:block;font-family:var(--disp);font-size:clamp(32px,4vw,50px);font-weight:800;color:var(--lime)}
+.nums span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+@media(max-width:680px){.nums{grid-template-columns:1fr 1fr;gap:30px}}
+.cta{text-align:center;padding:96px 0}
+.cta h2{font-size:clamp(32px,4.4vw,52px);margin-bottom:16px}
+.cta h2 em{color:var(--lime);font-style:normal}
+.cta p{color:var(--muted);font-size:17px;margin-bottom:28px}
+.foot{border-top:1px solid var(--line);padding:54px 0 28px}
+.foot__top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px}
+.foot__brand{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:800;font-size:20px}
+.foot__brand b{width:26px;height:26px;border-radius:7px;background:var(--lime);color:#0c0e0a;display:grid;place-items:center;font-size:15px}
+.foot__brand+p{color:var(--muted2);font-size:13px;margin-top:12px;max-width:24ch}
+.foot h4{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);margin-bottom:14px}
+.foot a{display:block;color:var(--muted);font-size:14px;margin-bottom:9px}.foot a:hover{color:var(--text)}
+.foot__bot{margin-top:42px;padding-top:20px;border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--muted2)}
+@media(max-width:780px){.foot__top{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap nav__in">
+  <a class="logo" href="#"><b>⚒</b>Forge</a>
+  <nav class="nav__links"><a href="#">Curriculum</a><a href="#">Outcomes</a><a href="#">Mentors</a><a href="#">Tuition</a></nav>
+  <div class="nav__right"><a href="#" style="font-size:14.5px;color:var(--muted)">Student login</a><a class="btn btn-pri" href="#">Apply now</a></div>
+</div></header>
 
-.ahero{padding-block:clamp(3rem,6vw,5rem)}
-.ahero__in{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,4vw,3.5rem);align-items:center}
-.ahero .eyebrow{display:inline-block;margin-bottom:1rem}
-.ahero h1{font-size:clamp(2.5rem,5vw,4.2rem)}.ahero h1 .serif{font-weight:400}
-.ahero p{color:var(--ink-soft);font-size:1.12rem;margin:1.2rem 0 1.8rem;max-width:46ch}
-.ahero__cta{display:flex;gap:.8rem;flex-wrap:wrap}.ahero__note{margin-top:1rem;font-size:.84rem;color:var(--ink-soft)}
-.ashot{border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 70px -30px rgba(0,0,0,.4);background:var(--card)}
-.ashot__bar{display:flex;gap:.4rem;padding:.7rem .9rem;border-bottom:1px solid var(--line)}
-.ashot__bar i{width:10px;height:10px;border-radius:50%;background:#d9d9d9}
-.ashot__body{display:grid;grid-template-columns:120px 1fr;min-height:300px}
-.ashot__side{background:var(--brand);padding:1rem}.ashot__side b{color:#fff;font-size:.85rem;font-weight:800}
-.ashot__nav{display:flex;flex-direction:column;gap:.3rem;margin-top:1rem}.ashot__nav span{color:rgba(255,255,255,.7);font-size:.74rem;padding:.35rem .5rem;border-radius:6px}.ashot__nav span.on{background:rgba(255,255,255,.16);color:#fff}
-.ashot__main{padding:1.2rem}.ashot__cards{display:flex;gap:.7rem;margin-bottom:1rem}
-.ashot__c{flex:1;background:color-mix(in srgb,var(--paper) 60%,#fff);border:1px solid var(--line);border-radius:10px;padding:.7rem}.ashot__c b{display:block;font-size:1.3rem;font-weight:800}.ashot__c small{font-size:.68rem;color:var(--ink-soft)}
-.ashot__chart{background:color-mix(in srgb,var(--paper) 60%,#fff);border:1px solid var(--line);border-radius:10px;height:130px;padding:.8rem;display:flex;align-items:flex-end;gap:.35rem}
-.ashot__chart b{flex:1;background:linear-gradient(180deg,var(--brand),color-mix(in srgb,var(--brand) 45%,#fff));border-radius:4px 4px 0 0}
-.logos{padding-block:2.2rem;border-block:1px solid var(--line);text-align:center}
-.logos p{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:600;margin-bottom:1.2rem}
-.logos__r{display:flex;flex-wrap:wrap;justify-content:center;gap:2.6rem}.logos__r span{font-weight:800;font-size:1.2rem;color:color-mix(in srgb,var(--ink) 32%,var(--paper))}
-.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
-.fcard{border:1px solid var(--line);border-radius:18px;padding:1.8rem;background:var(--card)}
-.fcard .ic{width:46px;height:46px;border-radius:12px;background:var(--accent-soft);color:var(--brand);display:grid;place-items:center;font-size:1.25rem;margin-bottom:.9rem}
-.fcard h3{font-size:1.12rem;margin-bottom:.4rem}.fcard p{color:var(--ink-soft);font-size:.93rem}
-.band{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:center;padding-block:clamp(3rem,6vw,5rem)}
-.band__m{border-radius:18px;overflow:hidden;aspect-ratio:4/3}.band__m img{width:100%;height:100%;object-fit:cover}
-.band__t h2{font-size:clamp(1.7rem,3.2vw,2.4rem);margin-bottom:1rem}.band__t h2 .serif{font-weight:400}.band__t p{color:var(--ink-soft);font-size:1.05rem;margin-bottom:1.2rem}
-.band__t ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}.band__t li{display:flex;gap:.6rem}.band__t li::before{content:'✓';color:var(--brand);font-weight:800}
-.acta{background:var(--shell);color:#fff;border-radius:22px;padding:clamp(2.5rem,6vw,4rem);text-align:center;margin-block:clamp(2.5rem,5vw,3.5rem)}
-.acta h2{color:#fff;font-size:clamp(1.9rem,4vw,2.8rem);margin-bottom:1rem}.acta h2 .serif{font-weight:400}.acta p{opacity:.82;margin-bottom:1.6rem}
-@media(max-width:860px){.ahero__in{grid-template-columns:1fr}.fgrid{grid-template-columns:1fr}.band{grid-template-columns:1fr}}
-</style></head><body><header class="nav"><div class="wrap nav__in"><a class="brand" href="#"><span class="brand__dot">F</span> Forge Academy</a><nav class="nav__links"><a href="#">Courses</a><a href="#">How it works</a><a href="#">Pricing</a><a href="#">FAQ</a></nav><a class="btn btn--primary" href="#">Get started</a></div></header>
-<section class="ahero wrap"><div class="ahero__in"><div><span class="eyebrow">💻 <b>Cohort 12</b>&nbsp;now enrolling</span><h1>Become a developer in <span class="serif">16 weeks</span></h1><p>Live cohorts, real projects, and 1:1 mentorship. Forge Academy gets you job-ready — or your money back.</p><div class="ahero__cta"><a class="btn btn--primary" href="#">Apply for next cohort</a><a class="btn btn--ghost" href="#">▶ Meet the mentors</a></div><p class="ahero__note">Income-share options · 92% hiring rate</p></div>
-<div class="ashot"><div class="ashot__bar"><i></i><i></i><i></i></div><div class="ashot__body"><aside class="ashot__side"><b>Forge Academy</b><div class="ashot__nav"><span class="on">🗓 Cohort</span><span>💻 Projects</span><span>🧑‍🏫 Mentors</span><span>📊 Progress</span><span>⚙ Settings</span></div></aside><main class="ashot__main"><div class="ashot__cards"><div class="ashot__c"><small>Cohort size</small><b>32</b></div><div class="ashot__c"><small>Job rate</small><b>92%</b></div><div class="ashot__c"><small>Avg salary</small><b>$86k</b></div></div><div class="ashot__chart"><b style="height:44%"></b><b style="height:60%"></b><b style="height:52%"></b><b style="height:74%"></b><b style="height:66%"></b><b style="height:86%"></b><b style="height:78%"></b><b style="height:94%"></b></div></main></div></div></div></section>
-<section class="logos"><div class="wrap"><p>Graduates now work at</p><div class="logos__r"><span>Stripe</span><span>Vercel</span><span>Linear</span><span>Shopify</span><span>Notion</span><span>Figma</span></div></div></section>
-<section><div class="wrap"><div class="stats__grid"><div class="stat"><b>4,200+</b><span>Graduates</span></div><div class="stat"><b>92%</b><span>Hired in 6 mo</span></div><div class="stat"><b>$86k</b><span>Avg starting salary</span></div><div class="stat"><b>16wk</b><span>To job-ready</span></div></div></div></section>
-<section class="wrap"><div class="shead"><span class="eyebrow">Everything to teach</span><h2>Built for courses that <span class="serif">actually finish</span></h2><p>From your first lesson to certificates and cohorts — everything you need to teach online, in one place.</p></div><div class="fgrid"><div class="fcard"><div class="ic">🎓</div><h3>Course builder</h3><p>Drag-and-drop lessons, quizzes, and assignments. No tech skills required.</p></div><div class="fcard"><div class="ic">🎬</div><h3>Video lessons</h3><p>Host or embed video with resume-where-you-left-off and speed controls.</p></div><div class="fcard"><div class="ic">📜</div><h3>Certificates</h3><p>Auto-issue branded certificates the moment a learner completes a course.</p></div><div class="fcard"><div class="ic">📊</div><h3>Progress tracking</h3><p>See exactly where every student is — and nudge the ones who stall.</p></div><div class="fcard"><div class="ic">👥</div><h3>Cohorts & community</h3><p>Run live cohorts with discussion, deadlines, and group accountability.</p></div><div class="fcard"><div class="ic">💳</div><h3>Sell anywhere</h3><p>One-time, subscription, or bundle pricing with coupons and upsells built in.</p></div></div></section>
-<section class="wrap"><div class="band"><div class="band__m"><img src="img/01.jpg" alt=""></div><div class="band__t"><span class="eyebrow">Teach</span><h2>Launch your course in <span class="serif">a weekend</span></h2><p>Upload your content, set your price, and open enrollment. Doctrine handles hosting, payments, and student access automatically.</p><ul><li>Unlimited lessons & students</li><li>Drip-schedule content</li><li>One-click Stripe & PayPal</li></ul></div></div></section>
-<section><div class="wrap"><div class="shead"><span class="eyebrow">Loved by educators</span><h2>Why instructors <span class="serif">choose</span> us</h2></div><div class="tgrid"><article class="tcard"><div class="tcard__s">★★★★★</div><p class="tcard__q">"My completion rate doubled after switching. The cohort tools alone are worth it."</p><div class="tcard__by"><span class="tcard__av">D</span><div><b>Dr. Lena Hart</b><span>Founder, Mindscale</span></div></div></article><article class="tcard"><div class="tcard__s">★★★★★</div><p class="tcard__q">"I launched my course in a weekend and made my first $10k the next month."</p><div class="tcard__by"><span class="tcard__av">T</span><div><b>Tomas Reed</b><span>Creator, CodePath</span></div></div></article><article class="tcard"><div class="tcard__s">★★★★★</div><p class="tcard__q">"Finally an LMS my non-technical team can actually run themselves."</p><div class="tcard__by"><span class="tcard__av">P</span><div><b>Priya Nair</b><span>L&D Lead, Northwind</span></div></div></article></div></div></section>
-<section class="wrap"><div class="acta"><h2>Plans that grow <span class="serif">with your school</span></h2><p>Start free. Upgrade when you enroll your first paid student.</p><a class="btn btn--light" href="#">Apply for next cohort</a></div></section>
-<footer class="foot"><div class="wrap"><div class="foot__top"><div class="foot__brand"><a class="brand" href="#" style="color:#fff"><span class="brand__dot">F</span> Forge Academy</a><p>Live coding bootcamps that get you hired.</p></div><div class="foot__col"><h4>Product</h4><a href="#">Course builder</a><a href="#">Cohorts</a><a href="#">Certificates</a><a href="#">Pricing</a></div><div class="foot__col"><h4>Solutions</h4><a href="#">Creators</a><a href="#">Academies</a><a href="#">Teams</a><a href="#">Universities</a></div><div class="foot__col"><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Blog</a><a href="#">Contact</a></div></div><div class="foot__bot">© 2026 Forge Academy. All rights reserved.</div></div></footer></body></html>
+<section class="hero"><div class="wrap hero__in">
+  <div>
+    <span class="tag">● Cohort 12 — enrolling now</span>
+    <h1>Become a developer in <em>16 weeks.</em></h1>
+    <p>Live cohorts, real projects, and 1:1 mentorship. Forge Academy gets you job-ready — or your money back.</p>
+    <div class="hero__cta"><a class="btn btn-pri" href="#">Apply for Cohort 12</a><a class="btn btn-line" href="#">▶ Meet the mentors</a></div>
+    <div class="hero__meta"><div><b>92%</b><span>HIRED IN 6 MONTHS</span></div><div><b>$86k</b><span>AVG STARTING SALARY</span></div><div><b>16 wk</b><span>TO JOB-READY</span></div></div>
+  </div>
+  <div class="road">
+    <h4>The 16-week roadmap</h4>
+    <div class="rstep on"><span class="dot">1</span><div><b>Foundations</b><span>HTML, CSS, JavaScript, Git</span></div><em>wk 1–4</em></div>
+    <div class="rstep on"><span class="dot">2</span><div><b>Front-end with React</b><span>Components, state, APIs</span></div><em>wk 5–8</em></div>
+    <div class="rstep"><span class="dot">3</span><div><b>Back-end &amp; databases</b><span>Node, SQL, auth, testing</span></div><em>wk 9–12</em></div>
+    <div class="rstep"><span class="dot">4</span><div><b>Capstone &amp; career</b><span>Ship a real product, interview prep</span></div><em>wk 13–16</em></div>
+  </div>
+</div></section>
+
+<section class="logos"><div class="wrap"><span>Graduates now work at</span>
+  <div class="logos__r"><span>Stripe</span><span>Vercel</span><span>Linear</span><span>Shopify</span><span>Notion</span><span>Figma</span></div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec__head"><span class="tag">// why forge</span><h2>A bootcamp that bets on your outcome.</h2></div>
+  <div class="grid">
+    <div class="f"><div class="ic">🧑‍🏫</div><h3>1:1 mentorship</h3><p>Weekly sessions with a senior engineer who reviews your code and your career.</p></div>
+    <div class="f"><div class="ic">🛠️</div><h3>Real projects</h3><p>Build and ship four production-grade apps you'll actually show in interviews.</p></div>
+    <div class="f"><div class="ic">👥</div><h3>Live cohorts</h3><p>Learn alongside 30 peers with daily standups, pairing, and accountability.</p></div>
+    <div class="f"><div class="ic">💼</div><h3>Career coaching</h3><p>Resume, portfolio, mock interviews, and intros to our hiring partners.</p></div>
+    <div class="f"><div class="ic">💸</div><h3>Pay after you're hired</h3><p>Income-share and deferred options — invest in the outcome, not the risk.</p></div>
+    <div class="f"><div class="ic">🛡️</div><h3>Job guarantee</h3><p>Land a role within 6 months or get your tuition back. We mean it.</p></div>
+  </div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="wrap split">
+  <div class="split__media"><img src="img/01.jpg" alt="Students coding"></div>
+  <div>
+    <span class="tag">// the experience</span>
+    <h2 style="margin-top:16px">Code every day, with people who've got your back.</h2>
+    <p>This isn't a video library you watch alone. It's a full-time, live, intense 16 weeks with mentors and a cohort pushing you forward.</p>
+    <ul>
+      <li>Daily standups, pairing, and code review</li>
+      <li>Beginner-friendly — no CS degree needed</li>
+      <li>Part-time evening track also available</li>
+    </ul>
+  </div>
+</div></section>
+
+<div class="wrap"><div class="nums">
+  <div><b>4,200+</b><span>GRADUATES</span></div>
+  <div><b>92%</b><span>HIRED IN 6 MO</span></div>
+  <div><b>$86k</b><span>AVG SALARY</span></div>
+  <div><b>4.9★</b><span>STUDENT RATING</span></div>
+</div></div>
+
+<section class="cta"><div class="wrap">
+  <span class="tag">● Cohort 12 closes soon</span>
+  <h2 style="margin-top:14px">Your dev career starts in <em>16 weeks.</em></h2>
+  <p>Applications for the next cohort are open. Spots are limited and fill fast.</p>
+  <a class="btn btn-pri" href="#">Apply now</a>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <div class="foot__top">
+    <div><div class="foot__brand"><b>⚒</b>Forge</div><p>Live coding bootcamps that get you hired.</p></div>
+    <div><h4>Program</h4><a href="#">Curriculum</a><a href="#">Outcomes</a><a href="#">Mentors</a><a href="#">Tuition</a></div>
+    <div><h4>Tracks</h4><a href="#">Full-time</a><a href="#">Part-time</a><a href="#">Prep course</a><a href="#">Scholarships</a></div>
+    <div><h4>Company</h4><a href="#">About</a><a href="#">Hire grads</a><a href="#">Blog</a><a href="#">Contact</a></div>
+  </div>
+  <div class="foot__bot">© 2026 Forge Academy — built by Nexen Labz</div>
+</div></footer>
+</body>
+</html>

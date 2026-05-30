@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Float — Money that moves with you</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
+<style>
+:root{
+  --ink:#0b1f16;--ink2:#4a6157;--paper:#f3f7f3;--card:#ffffff;--line:#e0e9e2;
+  --green:#10b981;--green-d:#059467;--green-soft:#dcf5ec;--lime:#c8f560;--peach:#ffd9a8;--mint:#eafaf2;
+  --font:'Manrope',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}html,body{overflow-x:hidden}
+body{font-family:var(--font);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
+.wrap{max-width:1140px;margin-inline:auto;padding-inline:24px}
+h1,h2,h3{line-height:1.06;letter-spacing:-.03em;font-weight:800}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--green-d);
+  background:var(--green-soft);padding:7px 14px;border-radius:999px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font);font-weight:700;font-size:15px;
+  padding:14px 26px;border-radius:14px;cursor:pointer;border:2px solid transparent;transition:.18s}
+.btn-pri{background:var(--ink);color:#fff}.btn-pri:hover{background:#0d2b1f;transform:translateY(-2px)}
+.btn-sec{background:#fff;border-color:var(--line);color:var(--ink)}.btn-sec:hover{border-color:var(--green)}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(243,247,243,.85);backdrop-filter:blur(10px)}
+.nav__in{display:flex;align-items:center;gap:34px;height:74px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:21px;letter-spacing:-.03em}
+.logo b{width:26px;height:26px;border-radius:9px;background:var(--green);display:grid;place-items:center;color:#fff;font-size:16px}
+.nav__links{display:flex;gap:26px;font-size:15px;font-weight:600;color:var(--ink2)}
+.nav__links a:hover{color:var(--ink)}
+.nav__right{margin-left:auto;display:flex;align-items:center;gap:16px}
+@media(max-width:880px){.nav__links{display:none}.nav__right a:first-child{display:none}}
+/* hero */
+.hero__in{display:grid;grid-template-columns:1.08fr .92fr;gap:46px;align-items:center;padding:60px 0 78px}
+.hero__in>*{min-width:0}
+.hero h1{font-size:clamp(40px,5.8vw,66px);margin:18px 0 18px}
+.hero p{font-size:19px;color:var(--ink2);max-width:26em;margin-bottom:26px}
+.hero__cta{display:flex;gap:13px;flex-wrap:wrap}
+.hero__tags{margin-top:24px;display:flex;gap:18px;flex-wrap:wrap;font-size:13.5px;font-weight:600;color:var(--ink2)}
+.hero__tags span::before{content:"✓ ";color:var(--green-d);font-weight:800}
+.hero__art{position:relative;display:flex;justify-content:center}
+.hero__art::before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;background:var(--lime);opacity:.5;top:30px;filter:blur(6px)}
+/* phone */
+.phone{position:relative;width:280px;background:#0b1f16;border-radius:40px;padding:12px;box-shadow:0 50px 90px -34px rgba(11,31,22,.5)}
+.phone__scr{background:linear-gradient(180deg,#0e5b41,#10b981);border-radius:30px;padding:24px 20px;color:#fff;min-height:540px}
+.phone__top{display:flex;justify-content:space-between;font-size:12px;opacity:.85;margin-bottom:26px}
+.phone__lbl{font-size:13px;opacity:.8}
+.phone__bal{font-size:44px;font-weight:800;letter-spacing:-.03em;margin:4px 0 2px}
+.phone__sub{font-size:13px;opacity:.85}
+.phone__chips{display:flex;gap:9px;margin:22px 0}
+.phone__chips a{flex:1;text-align:center;background:rgba(255,255,255,.16);border-radius:12px;padding:9px 0;font-size:12.5px;font-weight:700}
+.phone__list{background:#fff;color:var(--ink);border-radius:18px;padding:14px 16px;margin-top:6px}
+.phone__list h5{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);margin-bottom:10px;font-weight:700}
+.tx{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--line)}
+.tx:last-child{border-bottom:0}
+.tx i{width:34px;height:34px;border-radius:10px;background:var(--mint);display:grid;place-items:center;font-size:16px;font-style:normal}
+.tx b{font-size:13.5px;font-weight:700}.tx span{font-size:11.5px;color:var(--ink2)}
+.tx em{margin-left:auto;font-style:normal;font-weight:800;font-size:13.5px}
+.tx em.pos{color:var(--green-d)}
+@media(max-width:880px){.hero__in{grid-template-columns:1fr;gap:30px;padding:36px 0 50px}.hero__art{margin-top:6px}}
+/* trust band */
+.band{background:var(--ink);color:#fff;padding:22px 0}
+.band__in{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.band__in p{font-size:14px;opacity:.7}.band__in strong{font-weight:800}
+.band__logos{display:flex;gap:26px;font-weight:800;opacity:.6;font-size:16px;flex-wrap:wrap}
+/* features */
+.sec{padding:92px 0}
+.sec__head{max-width:600px;margin-bottom:46px}
+.sec__head h2{font-size:clamp(30px,4vw,46px);margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.f{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px}
+.f:nth-child(1){background:var(--green);color:#fff}
+.f:nth-child(1) p{color:rgba(255,255,255,.85)}
+.f .ic{font-size:26px;margin-bottom:14px}
+.f h3{font-size:17px;margin-bottom:7px;letter-spacing:-.02em}
+.f p{font-size:14px;color:var(--ink2)}
+@media(max-width:880px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}}
+/* split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;padding:40px 0}
+.split__media{border-radius:24px;overflow:hidden;aspect-ratio:4/3;border:1px solid var(--line)}
+.split__media img{width:100%;height:100%;object-fit:cover}
+.split h2{font-size:clamp(28px,3.4vw,40px);margin-bottom:16px}
+.split p{color:var(--ink2);font-size:17px;margin-bottom:20px}
+.split ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+.split li{display:flex;gap:11px;font-weight:600;font-size:15px}
+.split li::before{content:"✓";display:grid;place-items:center;width:24px;height:24px;flex:none;border-radius:50%;background:var(--green-soft);color:var(--green-d);font-weight:800;font-size:13px}
+@media(max-width:880px){.split{grid-template-columns:1fr;gap:30px}}
+/* big numbers */
+.nums{background:var(--mint);border-radius:28px;margin:30px 0;padding:54px 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:30px;text-align:center}
+.nums b{display:block;font-size:clamp(36px,5vw,56px);font-weight:800;letter-spacing:-.04em;color:var(--green-d)}
+.nums span{font-size:14px;color:var(--ink2);font-weight:600}
+@media(max-width:680px){.nums{grid-template-columns:1fr;gap:26px}}
+/* cta */
+.cta{text-align:center;padding:96px 0}
+.cta h2{font-size:clamp(32px,4.4vw,52px);margin-bottom:16px}
+.cta p{color:var(--ink2);font-size:18px;margin-bottom:28px}
+/* footer */
+.foot{background:var(--ink);color:#fff;padding:58px 0 28px}
+.foot__top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px}
+.foot__brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:20px}
+.foot__brand b{width:24px;height:24px;border-radius:8px;background:var(--green);display:grid;place-items:center;font-size:14px}
+.foot__brand+p{color:rgba(255,255,255,.55);font-size:13.5px;margin-top:12px;max-width:24ch}
+.foot h4{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:14px}
+.foot a{display:block;color:rgba(255,255,255,.8);font-size:14px;margin-bottom:9px}.foot a:hover{color:#fff}
+.foot__bot{margin-top:42px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);font-size:13px;color:rgba(255,255,255,.5)}
+@media(max-width:780px){.foot__top{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="wrap nav__in">
+  <a class="logo" href="#"><b>≋</b>Float</a>
+  <nav class="nav__links"><a href="#">Personal</a><a href="#">Business</a><a href="#">Cards</a><a href="#">Pricing</a></nav>
+  <div class="nav__right"><a href="#" style="font-weight:600;color:var(--ink2);font-size:15px">Log in</a><a class="btn btn-pri" href="#">Get the app</a></div>
+</div></header>
+
+<section class="hero"><div class="wrap hero__in">
+  <div>
+    <span class="chip">No fees · No minimums</span>
+    <h1>Money that moves as fast as you do.</h1>
+    <p>Float is the spending account that pays 4.30% APY, rounds up your change to invest, and never charges a surprise fee.</p>
+    <div class="hero__cta"><a class="btn btn-pri" href="#">Get the app</a><a class="btn btn-sec" href="#">See how it works</a></div>
+    <div class="hero__tags"><span>FDIC insured to $250k</span><span>Set up in 3 minutes</span><span>Free transfers</span></div>
+  </div>
+  <div class="hero__art">
+    <div class="phone"><div class="phone__scr">
+      <div class="phone__top"><span>9:41</span><span>Float ●</span></div>
+      <div class="phone__lbl">Total balance</div>
+      <div class="phone__bal">$8,240.55</div>
+      <div class="phone__sub">▲ $312.40 this month · 4.30% APY</div>
+      <div class="phone__chips"><a>Send</a><a>Add</a><a>Invest</a></div>
+      <div class="phone__list"><h5>Recent activity</h5>
+        <div class="tx"><i>☕</i><div><b>Blue Bottle</b><span>Today · Coffee</span></div><em>-$5.40</em></div>
+        <div class="tx"><i>💸</i><div><b>Payday</b><span>Yesterday · Income</span></div><em class="pos">+$2,400</em></div>
+        <div class="tx"><i>🛒</i><div><b>Whole Foods</b><span>Mon · Groceries</span></div><em>-$72.18</em></div>
+      </div>
+    </div></div>
+  </div>
+</div></section>
+
+<section class="band"><div class="wrap band__in">
+  <p><strong>$8B+</strong> moved · <strong>1.2M</strong> happy members · <strong>4.9★</strong> on the App Store</p>
+  <div class="band__logos"><span>Visa</span><span>Plaid</span><span>Stripe</span></div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec__head"><span class="chip">Why Float</span><h2>Everything your bank app should be.</h2></div>
+  <div class="grid">
+    <div class="f"><div class="ic">📈</div><h3>4.30% APY</h3><p>Earn on every dollar, paid daily. No tiers, no lock-ups, no catch.</p></div>
+    <div class="f"><div class="ic">🔁</div><h3>Auto round-ups</h3><p>Spare change from every purchase invested automatically.</p></div>
+    <div class="f"><div class="ic">🚫</div><h3>Zero fees</h3><p>No overdraft, no monthly, no minimum-balance fees. Ever.</p></div>
+    <div class="f"><div class="ic">⚡</div><h3>Instant transfers</h3><p>Send and receive money in seconds, free between members.</p></div>
+  </div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="wrap split">
+  <div class="split__media"><img src="img/01.jpg" alt="Paying with phone"></div>
+  <div>
+    <span class="chip">Spend smarter</span>
+    <h2 style="margin-top:14px">A card that gives back, automatically.</h2>
+    <p>Up to 5% cash back on the things you actually buy, with real-time spend insights that keep you on track.</p>
+    <ul>
+      <li>Up to 5% cash back, auto-applied</li>
+      <li>Freeze and unfreeze in one tap</li>
+      <li>Set smart budgets that nudge you</li>
+    </ul>
+  </div>
+</div></section>
+
+<div class="wrap"><div class="nums">
+  <div><b>$0</b><span>in surprise fees</span></div>
+  <div><b>4.30%</b><span>APY, paid daily</span></div>
+  <div><b>3 min</b><span>to open an account</span></div>
+</div></div>
+
+<section class="cta"><div class="wrap">
+  <span class="chip">Join 1.2M members</span>
+  <h2 style="margin-top:14px">Your money, finally working for you.</h2>
+  <p>Open a Float account in three minutes. No fees, no minimums, no nonsense.</p>
+  <a class="btn btn-pri" href="#">Get the app</a>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <div class="foot__top">
+    <div><div class="foot__brand"><b>≋</b>Float</div><p>The spending account that pays you back.</p></div>
+    <div><h4>Product</h4><a href="#">Spending</a><a href="#">Savings</a><a href="#">Card</a><a href="#">Invest</a></div>
+    <div><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Contact</a></div>
+    <div><h4>Legal</h4><a href="#">Disclosures</a><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Security</a></div>
+  </div>
+  <div class="foot__bot">© 2026 Float Financial — built by Nexen Labz. Banking services provided by partner banks, Member FDIC.</div>
+</div></footer>
+
+</body>
+</html>

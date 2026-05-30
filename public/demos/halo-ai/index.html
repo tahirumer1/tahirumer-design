@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Halo — AI Assistant for Support Teams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"></noscript>
+<style>
+:root{
+  --bg:#08080f;--bg2:#0f0f1c;--panel:#15151f;--panel2:#1c1c2b;--line:#262636;
+  --text:#ececf6;--muted:#9696b0;--muted2:#6f6f88;
+  --v:#7c5cff;--c:#22d3ee;--p:#ff5db1;
+  --grad:linear-gradient(120deg,#7c5cff,#22d3ee);
+  --disp:'Sora',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}html,body{overflow-x:hidden}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
+.wrap{max-width:1160px;margin-inline:auto;padding-inline:24px}
+h1,h2,h3{font-family:var(--disp);line-height:1.08;letter-spacing:-.025em;font-weight:700}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--muted);
+  padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(124,92,255,.06)}
+.pill b{width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:600;font-size:15px;
+  padding:13px 24px;border-radius:999px;cursor:pointer;border:1px solid transparent;transition:.2s}
+.btn-grad{background:var(--grad);color:#0a0a12;font-weight:700;box-shadow:0 10px 30px -8px rgba(124,92,255,.6)}
+.btn-grad:hover{transform:translateY(-2px);box-shadow:0 16px 40px -10px rgba(124,92,255,.7)}
+.btn-line{border-color:var(--line);color:var(--text);background:rgba(255,255,255,.02)}
+.btn-line:hover{border-color:var(--v);background:rgba(124,92,255,.1)}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(8,8,15,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;gap:34px;height:72px}
+.logo{display:flex;align-items:center;gap:11px;font-family:var(--disp);font-weight:700;font-size:20px}
+.logo .ring{width:24px;height:24px;border-radius:50%;background:conic-gradient(from 0deg,#7c5cff,#22d3ee,#ff5db1,#7c5cff);
+  -webkit-mask:radial-gradient(circle 6px at center,transparent 98%,#000);mask:radial-gradient(circle 6px at center,transparent 98%,#000)}
+.nav__links{display:flex;gap:26px;font-size:14.5px;color:var(--muted)}
+.nav__links a:hover{color:var(--text)}
+.nav__right{margin-left:auto;display:flex;align-items:center;gap:16px}
+@media(max-width:880px){.nav__links{display:none}.nav__right a:first-child{display:none}}
+/* hero */
+.hero{position:relative;overflow:hidden}
+.hero__glow{position:absolute;width:760px;height:760px;left:50%;top:-260px;transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(124,92,255,.32),rgba(34,211,238,.12) 40%,transparent 66%);filter:blur(20px)}
+.hero__in{position:relative;display:grid;grid-template-columns:1.04fr .96fr;gap:50px;align-items:center;padding:84px 0 90px}
+.hero__in>*{min-width:0}
+.hero h1{font-size:clamp(38px,5.6vw,62px);margin:20px 0 18px;font-weight:800}
+.hero p{font-size:18px;color:var(--muted);max-width:30em;margin-bottom:28px}
+.hero__cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero__stat{margin-top:30px;display:flex;gap:28px;flex-wrap:wrap}
+.hero__stat div b{font-family:var(--disp);font-size:22px;display:block}
+.hero__stat div span{font-size:12.5px;color:var(--muted2)}
+@media(max-width:880px){.hero__in{grid-template-columns:1fr;gap:40px;padding:54px 0 60px}}
+/* chat mockup */
+.chat{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:22px;padding:20px;
+  box-shadow:0 50px 100px -40px rgba(124,92,255,.5)}
+.chat__top{display:flex;align-items:center;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.chat__av{width:30px;height:30px;border-radius:50%;background:var(--grad)}
+.chat__top b{font-family:var(--disp);font-size:14px}.chat__top span{font-size:11px;color:var(--c);margin-left:auto}
+.bub{max-width:84%;padding:12px 15px;border-radius:16px;font-size:14px;margin-bottom:12px;line-height:1.5}
+.bub.me{margin-left:auto;background:var(--panel2);border:1px solid var(--line);border-bottom-right-radius:5px}
+.bub.ai{background:rgba(124,92,255,.13);border:1px solid rgba(124,92,255,.3);border-bottom-left-radius:5px}
+.bub.ai b{color:var(--c)}
+.typing{display:inline-flex;gap:4px;padding:14px 16px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:bl 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes bl{0%,60%,100%{opacity:.3}30%{opacity:1}}
+/* logos */
+.logos{padding:30px 0;border-block:1px solid var(--line);text-align:center}
+.logos span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2)}
+.logos__row{display:flex;justify-content:center;flex-wrap:wrap;gap:38px;margin-top:18px;font-family:var(--disp);font-weight:600;font-size:18px;color:#3f3f55}
+/* section */
+.sec{padding:100px 0}
+.sec__head{max-width:640px;margin:0 auto 56px;text-align:center}
+.sec__head h2{font-size:clamp(30px,4vw,46px);margin:14px 0 0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:18px;padding:28px}
+.card .ic{width:48px;height:48px;border-radius:13px;background:rgba(124,92,255,.14);display:grid;place-items:center;font-size:22px;margin-bottom:16px}
+.card h3{font-size:19px;margin-bottom:8px}.card p{font-size:14.5px;color:var(--muted)}
+@media(max-width:880px){.cards{grid-template-columns:1fr}}
+/* showcase */
+.show{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+.show__media{border-radius:20px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;position:relative}
+.show__media img{width:100%;height:100%;object-fit:cover}
+.show__media::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(124,92,255,.25),transparent 60%)}
+.show h2{font-size:clamp(28px,3.4vw,40px);margin-bottom:16px}
+.show p{color:var(--muted);font-size:16.5px;margin-bottom:20px}
+.steps{list-style:none;display:flex;flex-direction:column;gap:16px}
+.steps li{display:flex;gap:14px}
+.steps b{flex:none;width:30px;height:30px;border-radius:9px;background:var(--grad);color:#0a0a12;display:grid;place-items:center;font-family:var(--disp);font-weight:700;font-size:14px}
+.steps span{font-size:15px;color:var(--muted)}.steps strong{color:var(--text);display:block;font-weight:600}
+@media(max-width:880px){.show{grid-template-columns:1fr;gap:34px}}
+/* quote */
+.quote{padding:96px 0;text-align:center}
+.quote blockquote{font-family:var(--disp);font-weight:600;font-size:clamp(24px,3.4vw,38px);line-height:1.3;max-width:17em;margin:0 auto 24px}
+.quote cite{font-size:14px;color:var(--muted);font-style:normal}
+/* cta */
+.cta{position:relative;overflow:hidden;margin:0 24px 80px;border-radius:28px;background:linear-gradient(120deg,#1a1140,#0c2233);border:1px solid var(--line)}
+.cta__glow{position:absolute;width:500px;height:500px;right:-150px;top:-150px;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,.3),transparent 65%);filter:blur(20px)}
+.cta__in{position:relative;text-align:center;padding:80px 24px}
+.cta h2{font-size:clamp(30px,4vw,46px);margin-bottom:16px}
+.cta p{color:var(--muted);font-size:17px;margin-bottom:28px}
+/* footer */
+.foot{border-top:1px solid var(--line);padding:60px 0 30px}
+.foot__top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
+.foot__brand{display:flex;align-items:center;gap:11px;font-family:var(--disp);font-weight:700;font-size:19px}
+.foot__brand .ring{width:22px;height:22px;border-radius:50%;background:conic-gradient(from 0deg,#7c5cff,#22d3ee,#ff5db1,#7c5cff);-webkit-mask:radial-gradient(circle 5px at center,transparent 98%,#000);mask:radial-gradient(circle 5px at center,transparent 98%,#000)}
+.foot__brand+p{color:var(--muted2);font-size:13.5px;margin-top:12px;max-width:24ch}
+.foot h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);margin-bottom:14px}
+.foot a{display:block;color:var(--muted);font-size:14px;margin-bottom:9px}.foot a:hover{color:var(--text)}
+.foot__bot{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--muted2)}
+@media(max-width:780px){.cards{grid-template-columns:1fr}.foot__top{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="wrap nav__in">
+  <a class="logo" href="#"><span class="ring"></span>Halo</a>
+  <nav class="nav__links"><a href="#">Product</a><a href="#">Solutions</a><a href="#">Docs</a><a href="#">Pricing</a></nav>
+  <div class="nav__right"><a href="#" style="color:var(--muted);font-size:14.5px">Sign in</a><a class="btn btn-grad" href="#">Try Halo free</a></div>
+</div></header>
+
+<section class="hero"><div class="hero__glow"></div><div class="wrap hero__in">
+  <div>
+    <span class="pill"><b></b>New · Halo 3.0 with voice</span>
+    <h1>The AI teammate that <span class="grad-text">answers in seconds.</span></h1>
+    <p>Halo resolves 7 in 10 support conversations on its own — instantly, in 50+ languages, trained on your help docs in minutes.</p>
+    <div class="hero__cta"><a class="btn btn-grad" href="#">Try Halo free</a><a class="btn btn-line" href="#">▶ See it live</a></div>
+    <div class="hero__stat">
+      <div><b class="grad-text">70%</b><span>auto-resolved</span></div>
+      <div><b class="grad-text">12s</b><span>median reply</span></div>
+      <div><b class="grad-text">50+</b><span>languages</span></div>
+    </div>
+  </div>
+  <div class="chat">
+    <div class="chat__top"><span class="chat__av"></span><b>Halo</b><span>● online</span></div>
+    <div class="bub me">Hey, my order #4821 hasn't shipped yet — can you check?</div>
+    <div class="bub ai"><b>Halo</b><br>It's packed and leaving the warehouse today. You'll get tracking by 6pm. Want me to email it the moment it ships?</div>
+    <div class="bub me">Yes please!</div>
+    <div class="bub ai" style="width:auto;display:inline-block"><span class="typing"><i></i><i></i><i></i></span></div>
+  </div>
+</div></section>
+
+<section class="logos"><div class="wrap">
+  <span>Trusted by support teams at</span>
+  <div class="logos__row"><span>Notion</span><span>Ramp</span><span>Webflow</span><span>Loom</span><span>Brex</span></div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec__head"><span class="pill"><b></b>Capabilities</span><h2>Support that never sleeps.</h2></div>
+  <div class="cards">
+    <div class="card"><div class="ic">⚡</div><h3>Instant answers</h3><p>Trained on your docs, tickets, and FAQs — Halo replies accurately in under 15 seconds, 24/7.</p></div>
+    <div class="card"><div class="ic">🌐</div><h3>50+ languages</h3><p>One assistant, every customer. Halo detects and replies in the customer's language automatically.</p></div>
+    <div class="card"><div class="ic">🤝</div><h3>Smart handoff</h3><p>When it's complex, Halo hands off to a human with the full context attached — no repeating.</p></div>
+    <div class="card"><div class="ic">🔌</div><h3>Connected</h3><p>Plugs into Zendesk, Intercom, and Slack so Halo acts on real orders, refunds, and accounts.</p></div>
+    <div class="card"><div class="ic">🛡️</div><h3>On-brand & safe</h3><p>Guardrails, tone controls, and citations keep every answer accurate and on-message.</p></div>
+    <div class="card"><div class="ic">📈</div><h3>Always learning</h3><p>Every resolved chat sharpens Halo. Watch deflection climb week over week.</p></div>
+  </div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="wrap show">
+  <div class="show__media"><img src="img/01.jpg" alt="AI neural network"></div>
+  <div>
+    <span class="pill"><b></b>How it works</span>
+    <h2 style="margin-top:18px">Live in an afternoon, not a quarter.</h2>
+    <p>No data science team required. Point Halo at your knowledge base and it's answering real customers the same day.</p>
+    <ul class="steps">
+      <li><b>1</b><span><strong>Connect your docs</strong>Sync your help center, PDFs, and past tickets in one click.</span></li>
+      <li><b>2</b><span><strong>Set the guardrails</strong>Choose tone, escalation rules, and what Halo can act on.</span></li>
+      <li><b>3</b><span><strong>Go live</strong>Drop in one snippet. Halo starts resolving conversations instantly.</span></li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="quote"><div class="wrap">
+  <blockquote>“Halo handles 68% of our tickets before a human ever sees them. Our team finally has room to breathe.”</blockquote>
+  <cite>— Priya Nair · Head of Support, Ramp</cite>
+</div></section>
+
+<section class="cta"><div class="cta__glow"></div><div class="cta__in">
+  <h2>Give your team an AI teammate.</h2>
+  <p>Free for your first 100 conversations a month. No credit card, live in an afternoon.</p>
+  <a class="btn btn-grad" href="#">Try Halo free</a>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <div class="foot__top">
+    <div><div class="foot__brand"><span class="ring"></span>Halo</div><p>The AI teammate that answers in seconds.</p></div>
+    <div><h4>Product</h4><a href="#">Features</a><a href="#">Integrations</a><a href="#">Security</a><a href="#">Pricing</a></div>
+    <div><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Blog</a><a href="#">Contact</a></div>
+    <div><h4>Developers</h4><a href="#">Docs</a><a href="#">API</a><a href="#">Status</a><a href="#">Changelog</a></div>
+  </div>
+  <div class="foot__bot">© 2026 Halo AI — built by Nexen Labz</div>
+</div></footer>
+
+</body>
+</html>

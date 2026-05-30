@@ -1,68 +1,162 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedar — Demo: Architecture Studio</title><style>
-:root{--ink:#15130f;--ink-soft:#5c574e;--paper:#f6f4f0;--card:#ffffff;--line:#e2ddd4;
---brand:#1c1917;--brand-ink:#0c0a09;--accent:#a8855c;--accent-soft:#ece2d4;--shell:#15130f;
---maxw:1180px;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
---serif:Georgia,'Iowan Old Style','Times New Roman',serif;}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cedar &amp; Stone — Architecture Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500&display=swap"></noscript>
+<style>
+:root{--ink:#15140f;--ink2:#6a655b;--stone:#f4f2ec;--paper:#faf9f5;--line:#ddd8cc;--accent:#9c7a4d;
+  --disp:'Syne',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}html,body{overflow-x:hidden}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
-.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.1rem,4vw,2rem)}
-.serif{font-family:var(--serif);font-style:italic;font-weight:400}
-.eyebrow{font-size:.76rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--brand)}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.6rem;border-radius:12px;font-weight:600;font-size:.95rem;border:1px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s}
-.btn--primary{background:var(--brand);color:#fff}.btn--primary:hover{background:var(--brand-ink);transform:translateY(-2px)}
-.btn--ghost{background:transparent;border-color:currentColor;color:inherit}.btn--ghost:hover{transform:translateY(-2px)}
-.btn--light{background:#fff;color:var(--brand)}.btn--light:hover{transform:translateY(-2px)}
-h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:800}
-.nav{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav__in{display:flex;align-items:center;justify-content:space-between;height:68px}
-.brand{display:flex;align-items:center;gap:.55rem;font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
-.brand__dot{width:28px;height:28px;border-radius:8px;background:var(--brand);display:grid;place-items:center;color:#fff;font-family:var(--serif);font-size:1.1rem}
-.nav__links{display:flex;gap:1.8rem;font-size:.92rem;font-weight:500}.nav__links a:hover{color:var(--brand)}
-@media(max-width:860px){.nav__links{display:none}}
-.shead{max-width:640px;margin:0 auto 2.6rem;text-align:center}
-.shead h2{font-size:clamp(1.9rem,4vw,2.7rem);margin:.6rem 0 1rem}.shead h2 .serif{font-weight:400}.shead p{color:var(--ink-soft);font-size:1.05rem}
-.stats__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;text-align:center}
-.stat b{display:block;font-size:clamp(2rem,4vw,2.9rem);font-weight:800;letter-spacing:-.03em;color:var(--brand)}
-.stat span{color:var(--ink-soft);font-size:.9rem}
-@media(max-width:760px){.stats__grid{grid-template-columns:1fr 1fr;gap:1.6rem}}
-.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
-.tcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.7rem}
-.tcard__s{color:var(--accent);margin-bottom:.7rem}.tcard__q{margin-bottom:1.2rem}
-.tcard__by{display:flex;gap:.7rem;align-items:center}.tcard__av{width:40px;height:40px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-family:var(--serif)}
-.tcard__by b{display:block;font-size:.9rem}.tcard__by span{font-size:.8rem;color:var(--ink-soft)}
-@media(max-width:860px){.tgrid{grid-template-columns:1fr}}
-.foot{background:var(--shell);color:#fff;padding-block:3rem 1.8rem;margin-top:0}
-.foot__top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2rem}
-.foot__brand p{opacity:.7;font-size:.92rem;margin-top:.7rem;max-width:26ch}
-.foot__col h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;opacity:.6;margin-bottom:.9rem}
-.foot__col a{display:block;font-size:.92rem;margin-bottom:.5rem;opacity:.85}.foot__col a:hover{opacity:1}
-.foot__bot{margin-top:2.2rem;padding-top:1.3rem;border-top:1px solid rgba(255,255,255,.12);font-size:.84rem;opacity:.65}
-@media(max-width:760px){.foot__top{grid-template-columns:1fr 1fr}}
+.wrap{max-width:1280px;margin-inline:auto;padding-inline:32px}
+h1,h2,h3{font-family:var(--disp);line-height:1.02;letter-spacing:-.02em;font-weight:700}
+.ey{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink2);font-weight:500}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--body);font-weight:500;font-size:14px;letter-spacing:.02em;padding:13px 24px;border:1px solid var(--ink);border-radius:0;cursor:pointer;transition:.18s;background:transparent;color:var(--ink)}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn-fill{background:var(--ink);color:var(--paper)}.btn-fill:hover{background:transparent;color:var(--ink)}
+.nav{position:sticky;top:0;z-index:50;background:rgba(250,249,245,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;height:84px}
+.logo{font-family:var(--disp);font-weight:800;font-size:21px;letter-spacing:-.02em}.logo span{color:var(--accent)}
+.nav__links{margin-left:56px;display:flex;gap:34px;font-size:13.5px;letter-spacing:.02em;color:var(--ink2)}
+.nav__links a:hover{color:var(--ink)}
+.nav__right{margin-left:auto;font-size:13.5px}
+@media(max-width:900px){.nav__links{display:none}}
+/* intro */
+.intro{padding:72px 0 40px}
+.intro__row{display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:end}
+.intro h1{font-size:clamp(46px,8vw,118px);letter-spacing:-.03em;font-weight:800;margin-top:18px}
+.intro h1 em{font-style:italic;font-weight:600;color:var(--accent)}
+.intro__row p{color:var(--ink2);font-size:16px;max-width:34ch;padding-bottom:10px}
+@media(max-width:880px){.intro__row{grid-template-columns:1fr;gap:20px}}
+/* feature image */
+.feat{margin:14px 0 0}
+.feat__img{aspect-ratio:16/8;overflow:hidden}
+.feat__img img{width:100%;height:100%;object-fit:cover}
+.feat__meta{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink2);flex-wrap:wrap;gap:10px}
+.feat__meta b{color:var(--ink);font-weight:500}
+/* work grid */
+.work{padding:80px 0}
+.work__head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:34px;flex-wrap:wrap;gap:12px}
+.work__head h2{font-size:clamp(26px,3vw,40px)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:40px 32px}
+.proj{cursor:pointer}
+.proj__img{aspect-ratio:4/3;overflow:hidden;margin-bottom:16px}
+.proj__img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.proj:hover .proj__img img{transform:scale(1.04)}
+.proj__row{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--ink);padding-top:12px}
+.proj h3{font-size:20px;font-weight:700}
+.proj .yr{font-family:var(--body);font-size:13px;color:var(--ink2)}
+.proj p{font-size:13.5px;color:var(--ink2);margin-top:4px}
+.proj.tall{grid-row:span 1}
+@media(max-width:760px){.grid{grid-template-columns:1fr;gap:32px}}
+/* studio statement */
+.state{background:var(--ink);color:var(--paper);padding:110px 0}
+.state__in{display:grid;grid-template-columns:1fr 1.4fr;gap:50px}
+.state h2{font-size:clamp(28px,3.6vw,46px);font-weight:700;line-height:1.12}
+.state h2 em{font-style:italic;color:var(--accent);font-weight:600}
+.state p{color:#c8c2b4;font-size:16px;margin-bottom:20px}
+.state ul{list-style:none}
+.state li{display:flex;justify-content:space-between;padding:16px 0;border-top:1px solid rgba(255,255,255,.16);font-size:14px}
+.state li span{color:#9d978a}
+@media(max-width:880px){.state__in{grid-template-columns:1fr;gap:30px}}
+/* services */
+.svc{padding:90px 0}
+.svc h2{font-size:clamp(26px,3vw,38px);margin-bottom:40px}
+.svc__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.svc__c{background:var(--paper);padding:34px 28px}
+.svc__c .n{font-family:var(--disp);font-size:13px;color:var(--accent);margin-bottom:18px}
+.svc__c h3{font-size:19px;margin-bottom:8px}.svc__c p{font-size:14px;color:var(--ink2)}
+@media(max-width:880px){.svc__grid{grid-template-columns:1fr}}
+/* cta */
+.cta{border-top:1px solid var(--line);padding:90px 0;text-align:center}
+.cta h2{font-size:clamp(34px,5vw,68px);font-weight:800;letter-spacing:-.03em;margin-bottom:26px}
+.cta h2 em{font-style:italic;font-weight:600;color:var(--accent)}
+/* footer */
+.foot{border-top:1px solid var(--ink);padding:48px 0 30px}
+.foot__top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px}
+.foot__top .logo{font-size:32px}
+.foot__cols{display:flex;gap:60px;flex-wrap:wrap}
+.foot__cols h4{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin-bottom:14px}
+.foot__cols a{display:block;font-size:14px;margin-bottom:8px}.foot__cols a:hover{color:var(--accent)}
+.foot__bot{margin-top:40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:12.5px;color:var(--ink2)}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap nav__in">
+  <a class="logo" href="#">Cedar<span>&amp;</span>Stone</a>
+  <nav class="nav__links"><a href="#">Work</a><a href="#">Studio</a><a href="#">Services</a><a href="#">Journal</a></nav>
+  <div class="nav__right"><a href="#">Start a project →</a></div>
+</div></header>
 
-.intro{padding:clamp(3rem,7vw,5rem) 0 2rem}
-.intro h1{font-size:clamp(2.4rem,5vw,4rem);max-width:18ch}.intro h1 .serif{font-weight:400}
-.intro p{color:var(--ink-soft);font-size:1.15rem;max-width:50ch;margin-top:1.2rem}
-.pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;padding-bottom:2rem}
-.pgrid figure{margin:0;border-radius:6px;overflow:hidden;position:relative}
-.pgrid img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .5s}
-.pgrid figure:hover img{transform:scale(1.04)}
-.pgrid figcaption{position:absolute;left:1rem;bottom:1rem;color:#fff;font-weight:600;text-shadow:0 1px 10px rgba(0,0,0,.5);font-size:.95rem}
-.pgrid .tall{grid-row:span 2}.pgrid .tall img{aspect-ratio:auto;height:100%}
-.studio{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:center;padding-block:clamp(3rem,6vw,5rem)}
-.studio__m{border-radius:8px;overflow:hidden;aspect-ratio:3/4}.studio__m img{width:100%;height:100%;object-fit:cover}
-.studio__t h2{font-size:clamp(1.8rem,3.4vw,2.6rem);margin-bottom:1.1rem}.studio__t h2 .serif{font-weight:400}
-.studio__t p{color:var(--ink-soft);font-size:1.06rem;margin-bottom:1rem}
-.svc{padding-block:clamp(3rem,6vw,5rem);border-top:1px solid var(--line)}
-.svc__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem}
-.svc__i h3{font-size:1.15rem;margin-bottom:.4rem;padding-top:1rem;border-top:2px solid var(--brand);display:inline-block}
-.svc__i p{color:var(--ink-soft);font-size:.95rem}
-@media(max-width:820px){.studio{grid-template-columns:1fr}.svc__grid{grid-template-columns:1fr}}
-@media(max-width:600px){.pgrid{grid-template-columns:1fr}.pgrid .tall{grid-row:auto}}
-</style></head><body><header class="nav"><div class="wrap nav__in"><a class="brand" href="#"><span class="brand__dot">C</span> Cedar &amp; Stone</a><nav class="nav__links"><a href="#">Projects</a><a href="#">Studio</a><a href="#">Services</a><a href="#">Journal</a></nav><a class="btn btn--primary" href="#">Start a project</a></div></header>
-<section class="intro wrap"><span class="eyebrow">Approach</span><h1>We design <span class="serif">spaces</span> that hold a life</h1><p>Cedar &amp; Stone is an architecture studio crafting homes, civic buildings, and interiors rooted in place and light.</p></section>
-<section class="wrap"><div class="pgrid"><figure class="tall"><img src="img/01.jpg" alt="" loading="lazy"><figcaption>Selected work</figcaption></figure><figure><img src="img/02.jpg" alt="" loading="lazy"><figcaption>Recent project</figcaption></figure><figure><img src="img/03.jpg" alt="" loading="lazy"><figcaption>Featured</figcaption></figure><figure><img src="img/04.jpg" alt="" loading="lazy"><figcaption>Studio</figcaption></figure><figure><img src="img/05.jpg" alt="" loading="lazy"><figcaption>Detail</figcaption></figure><figure><img src="img/06.jpg" alt="" loading="lazy"><figcaption>Commission</figcaption></figure></div></section>
-<section class="wrap"><div class="studio"><div class="studio__m"><img src="img/07.jpg" alt=""></div><div class="studio__t"><span class="eyebrow">The studio</span><h2>A small studio, <span class="serif">deeply</span> involved</h2><p>You work directly with the principals from first sketch to final walkthrough. No hand-offs, no dilution.</p><ul style="list-style:none;color:var(--ink-soft)"><li>— Principal-led on every project</li><li>— Award-winning team</li><li>— 30+ years of practice</li></ul></div></div></section>
-<section class="svc wrap"><span class="eyebrow">The practice</span><h2 style="font-size:clamp(1.8rem,3.4vw,2.5rem);margin-top:.5rem">Architecture with <span class="serif">intent</span></h2><div class="svc__grid"><div class="svc__i"><h3>Architecture</h3><p>Residential, cultural, and commercial work from concept to completion.</p></div><div class="svc__i"><h3>Interiors</h3><p>Considered interiors that carry the architecture all the way through.</p></div><div class="svc__i"><h3>Landscape</h3><p>Buildings and grounds designed as one continuous experience.</p></div><div class="svc__i"><h3>Project delivery</h3><p>Hands-on through construction, protecting the design to the last detail.</p></div><div class="svc__i"><h3>Planning</h3><p>Feasibility, permitting, and master planning handled in-house.</p></div><div class="svc__i"><h3>Sustainability</h3><p>Low-energy, daylight-led design as a default, not an add-on.</p></div></div></section>
-<section><div class="wrap"><div class="shead"><span class="eyebrow">Clients</span><h2>In their <span class="serif">own words</span></h2></div><div class="tgrid"><article class="tcard"><div class="tcard__s">★★★★★</div><p class="tcard__q">"They understood our home before we could describe it. The result is extraordinary."</p><div class="tcard__by"><span class="tcard__av">H</span><div><b>Helena & Marc</b><span>Private residence</span></div></div></article><article class="tcard"><div class="tcard__s">★★★★★</div><p class="tcard__q">"Cedar delivered a civic building our whole town is proud of — on time and on budget."</p><div class="tcard__by"><span class="tcard__av">D</span><div><b>Daniel Osei</b><span>City of Brackton</span></div></div></article><article class="tcard"><div class="tcard__s">★★★★★</div><p class="tcard__q">"The most collaborative architects we have ever worked with."</p><div class="tcard__by"><span class="tcard__av">S</span><div><b>Sofia Renn</b><span>Renn Hospitality</span></div></div></article></div></div></section>
-<footer class="foot"><div class="wrap"><div class="foot__top"><div class="foot__brand"><a class="brand" href="#" style="color:#fff"><span class="brand__dot">C</span> Cedar &amp; Stone</a><p>An architecture studio rooted in place and light.</p></div><div class="foot__col"><h4>Work</h4><a href="#">Residential</a><a href="#">Cultural</a><a href="#">Commercial</a><a href="#">Interiors</a></div><div class="foot__col"><h4>Studio</h4><a href="#">About</a><a href="#">Team</a><a href="#">Awards</a><a href="#">Journal</a></div><div class="foot__col"><h4>Contact</h4><a href="#">Enquire</a><a href="#">Press</a><a href="#">Careers</a><a href="#">Visit</a></div></div><div class="foot__bot">© 2026 Cedar &amp; Stone. All rights reserved.</div></div></footer></body></html>
+<section class="intro"><div class="wrap">
+  <div class="intro__row">
+    <div><span class="ey">Architecture · Est. 1992</span><h1>Spaces that <em>hold</em> a life.</h1></div>
+    <p>Cedar &amp; Stone is an architecture studio crafting homes, civic buildings, and interiors rooted in place, light, and the lives they hold.</p>
+  </div>
+</div></section>
+
+<section class="feat"><div class="wrap">
+  <div class="feat__img"><img src="img/01.jpg" alt="Featured project"></div>
+  <div class="feat__meta"><b>Larkspur House — Marin, CA</b><span>Residential · Completed 2025 · 4,200 sq ft</span></div>
+</div></section>
+
+<section class="work"><div class="wrap">
+  <div class="work__head"><h2>Selected work</h2><a class="ey" href="#">All projects (240) →</a></div>
+  <div class="grid">
+    <div class="proj"><div class="proj__img"><img src="img/02.jpg" alt=""></div><div class="proj__row"><h3>The Meridian Pavilion</h3><span class="yr">2025</span></div><p>Cultural · Brackton</p></div>
+    <div class="proj"><div class="proj__img"><img src="img/03.jpg" alt=""></div><div class="proj__row"><h3>Glasshouse Residence</h3><span class="yr">2024</span></div><p>Residential · Aspen</p></div>
+    <div class="proj"><div class="proj__img"><img src="img/04.jpg" alt=""></div><div class="proj__row"><h3>Quarry Civic Hall</h3><span class="yr">2024</span></div><p>Civic · Portland</p></div>
+    <div class="proj"><div class="proj__img"><img src="img/05.jpg" alt=""></div><div class="proj__row"><h3>Atelier Offices</h3><span class="yr">2023</span></div><p>Commercial · Seattle</p></div>
+  </div>
+</div></section>
+
+<section class="state"><div class="wrap state__in">
+  <h2>Every project begins with <em>place.</em></h2>
+  <div>
+    <p>We study how light, climate, and context shape a site before a single line is drawn — so the architecture belongs, and endures. You work directly with the principals, first sketch to final walkthrough.</p>
+    <ul>
+      <li>Principal-led on every project <span>Always</span></li>
+      <li>Projects built <span>240</span></li>
+      <li>Design awards <span>36</span></li>
+      <li>Years in practice <span>30+</span></li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="svc"><div class="wrap">
+  <h2>What we do</h2>
+  <div class="svc__grid">
+    <div class="svc__c"><div class="n">01</div><h3>Architecture</h3><p>Residential, cultural, and commercial work from concept to completion.</p></div>
+    <div class="svc__c"><div class="n">02</div><h3>Interiors</h3><p>Considered interiors that carry the architecture all the way through.</p></div>
+    <div class="svc__c"><div class="n">03</div><h3>Landscape</h3><p>Buildings and grounds designed as one continuous experience.</p></div>
+    <div class="svc__c"><div class="n">04</div><h3>Master planning</h3><p>Feasibility, phasing, and permitting handled entirely in-house.</p></div>
+    <div class="svc__c"><div class="n">05</div><h3>Project delivery</h3><p>Hands-on through construction, protecting the design to the last detail.</p></div>
+    <div class="svc__c"><div class="n">06</div><h3>Sustainability</h3><p>Low-energy, daylight-led design as a default, not an add-on.</p></div>
+  </div>
+</div></section>
+
+<section class="cta"><div class="wrap">
+  <h2>Let's build something that <em>lasts.</em></h2>
+  <a class="btn btn-fill" href="#">Start a project</a>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <div class="foot__top">
+    <a class="logo" href="#">Cedar<span>&amp;</span>Stone</a>
+    <div class="foot__cols">
+      <div><h4>Studio</h4><a href="#">About</a><a href="#">Team</a><a href="#">Awards</a><a href="#">Journal</a></div>
+      <div><h4>Work</h4><a href="#">Residential</a><a href="#">Cultural</a><a href="#">Commercial</a><a href="#">Interiors</a></div>
+      <div><h4>Contact</h4><a href="#">Enquire</a><a href="#">Press</a><a href="#">Careers</a><a href="#">Visit</a></div>
+    </div>
+  </div>
+  <div class="foot__bot"><span>© 2026 Cedar &amp; Stone — built by Nexen Labz</span><span>An architecture studio rooted in place and light.</span></div>
+</div></footer>
+</body>
+</html>

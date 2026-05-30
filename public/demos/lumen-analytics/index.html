@@ -1,82 +1,219 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lumen — Demo: Product Analytics</title><style>
-:root{--ink:#15130f;--ink-soft:#5c574e;--paper:#fbf9f4;--card:#ffffff;--line:#e9e4d8;
---brand:#3b2fd6;--brand-ink:#2418b8;--accent:#e8633a;--accent-soft:#eee9fb;--shell:#15130f;
---maxw:1180px;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
---serif:Georgia,'Iowan Old Style','Times New Roman',serif;}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
-.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.1rem,4vw,2rem)}
-.serif{font-family:var(--serif);font-style:italic;font-weight:400}
-.eyebrow{font-size:.76rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--brand)}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.6rem;border-radius:12px;font-weight:600;font-size:.95rem;border:1px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s}
-.btn--primary{background:var(--brand);color:#fff}.btn--primary:hover{background:var(--brand-ink);transform:translateY(-2px)}
-.btn--ghost{background:transparent;border-color:currentColor;color:inherit}.btn--ghost:hover{transform:translateY(-2px)}
-.btn--light{background:#fff;color:var(--brand)}.btn--light:hover{transform:translateY(-2px)}
-h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:800}
-.nav{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav__in{display:flex;align-items:center;justify-content:space-between;height:68px}
-.brand{display:flex;align-items:center;gap:.55rem;font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
-.brand__dot{width:28px;height:28px;border-radius:8px;background:var(--brand);display:grid;place-items:center;color:#fff;font-family:var(--serif);font-size:1.1rem}
-.nav__links{display:flex;gap:1.8rem;font-size:.92rem;font-weight:500}.nav__links a:hover{color:var(--brand)}
-@media(max-width:860px){.nav__links{display:none}}
-.shead{max-width:640px;margin:0 auto 2.6rem;text-align:center}
-.shead h2{font-size:clamp(1.9rem,4vw,2.7rem);margin:.6rem 0 1rem}.shead h2 .serif{font-weight:400}.shead p{color:var(--ink-soft);font-size:1.05rem}
-.stats__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;text-align:center}
-.stat b{display:block;font-size:clamp(2rem,4vw,2.9rem);font-weight:800;letter-spacing:-.03em;color:var(--brand)}
-.stat span{color:var(--ink-soft);font-size:.9rem}
-@media(max-width:760px){.stats__grid{grid-template-columns:1fr 1fr;gap:1.6rem}}
-.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
-.tcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.7rem}
-.tcard__s{color:var(--accent);margin-bottom:.7rem}.tcard__q{margin-bottom:1.2rem}
-.tcard__by{display:flex;gap:.7rem;align-items:center}.tcard__av{width:40px;height:40px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-family:var(--serif)}
-.tcard__by b{display:block;font-size:.9rem}.tcard__by span{font-size:.8rem;color:var(--ink-soft)}
-@media(max-width:860px){.tgrid{grid-template-columns:1fr}}
-.foot{background:var(--shell);color:#fff;padding-block:3rem 1.8rem;margin-top:0}
-.foot__top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2rem}
-.foot__brand p{opacity:.7;font-size:.92rem;margin-top:.7rem;max-width:26ch}
-.foot__col h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;opacity:.6;margin-bottom:.9rem}
-.foot__col a{display:block;font-size:.92rem;margin-bottom:.5rem;opacity:.85}.foot__col a:hover{opacity:1}
-.foot__bot{margin-top:2.2rem;padding-top:1.3rem;border-top:1px solid rgba(255,255,255,.12);font-size:.84rem;opacity:.65}
-@media(max-width:760px){.foot__top{grid-template-columns:1fr 1fr}}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lumen — Product Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"></noscript>
+<style>
+:root{
+  --ink:#0d0e1a;--ink2:#4a4d63;--paper:#ffffff;--soft:#f4f4fb;--line:#e6e6f1;
+  --violet:#4f46e5;--violet-d:#3b2fd6;--violet-ink:#27228f;--coral:#ff6a45;--mint:#10b981;
+  --grid:#ececf7;
+  --disp:'Space Grotesk',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{overflow-x:hidden;max-width:100%}
+body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin-inline:auto;padding-inline:24px}
+h1,h2,h3{font-family:var(--disp);line-height:1.05;letter-spacing:-.03em;font-weight:700}
+.mono{font-family:var(--mono)}
+.tag{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--violet);text-transform:uppercase}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:600;font-size:15px;
+  padding:13px 22px;border-radius:8px;border:1.5px solid transparent;cursor:pointer;transition:.18s}
+.btn-pri{background:var(--violet);color:#fff;box-shadow:0 8px 24px -10px var(--violet)}
+.btn-pri:hover{background:var(--violet-d);transform:translateY(-2px)}
+.btn-sec{background:#fff;border-color:var(--line);color:var(--ink)}
+.btn-sec:hover{border-color:var(--violet);color:var(--violet)}
+.btn-ghost{color:var(--ink);font-weight:600;font-size:15px}
+.btn-ghost:hover{color:var(--violet)}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;gap:36px;height:70px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:700;font-size:20px;letter-spacing:-.02em}
+.logo b{width:22px;height:22px;background:var(--violet);transform:rotate(45deg);border-radius:5px;display:inline-block}
+.nav__links{display:flex;gap:28px;font-size:15px;font-weight:500;color:var(--ink2)}
+.nav__links a:hover{color:var(--ink)}
+.nav__right{margin-left:auto;display:flex;align-items:center;gap:18px}
+@media(max-width:880px){.nav__links{display:none}.nav__right .btn-ghost{display:none}}
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero::before{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:46px 46px;-webkit-mask-image:radial-gradient(ellipse 80% 70% at 70% 30%,#000,transparent 75%);mask-image:radial-gradient(ellipse 80% 70% at 70% 30%,#000,transparent 75%);opacity:.7}
+.hero__blob{position:absolute;right:-160px;top:-120px;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,106,69,.16),transparent 65%);filter:blur(10px)}
+.hero__in{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center;padding:74px 0 84px}
+.hero__in>*{min-width:0}
+.hero h1{font-size:clamp(33px,5.4vw,62px);margin:18px 0 20px;word-wrap:break-word}
+.hero h1 em{font-style:normal;color:var(--violet)}
+.hero p{font-size:19px;color:var(--ink2);max-width:30em;margin-bottom:30px}
+.hero__cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero__note{margin-top:18px;font-family:var(--mono);font-size:12.5px;color:var(--ink2)}
+.hero__logos{margin-top:42px}
+.hero__logos>span{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.hero__logos div{display:flex;gap:26px;flex-wrap:wrap;margin-top:14px;font-family:var(--disp);font-weight:600;font-size:18px;color:#b7b7cc}
+@media(max-width:880px){.hero__in{grid-template-columns:1fr;gap:40px;padding:48px 0 56px}}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 40px 80px -40px rgba(38,34,143,.4);overflow:hidden}
+.panel__bar{display:flex;align-items:center;gap:8px;padding:13px 16px;border-bottom:1px solid var(--line);background:var(--soft)}
+.panel__bar i{width:10px;height:10px;border-radius:50%;background:#d3d3e2}
+.panel__bar span{margin-left:8px;font-family:var(--mono);font-size:12px;color:var(--ink2)}
+.panel__body{padding:20px}
+.kpi{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:6px}
+.kpi b{font-family:var(--disp);font-size:42px;letter-spacing:-.03em}
+.kpi em{font-style:normal;font-family:var(--mono);font-size:13px;color:var(--mint);background:#e7f8f1;padding:3px 8px;border-radius:6px}
+.kpi-label{font-family:var(--mono);font-size:12px;color:var(--ink2);text-transform:uppercase;letter-spacing:.05em}
+.spark{margin:16px 0 22px;height:64px;width:100%}
+.funnel{display:flex;flex-direction:column;gap:12px}
+.frow{font-family:var(--mono);font-size:12px;color:var(--ink2)}
+.frow b{display:block;height:24px;border-radius:6px;background:linear-gradient(90deg,var(--violet),#7c74f0);margin-top:5px}
+.metrics{border-bottom:1px solid var(--line)}
+.metrics__in{display:grid;grid-template-columns:repeat(3,1fr);padding:54px 0}
+.metric{padding:0 30px;border-left:1px solid var(--line)}
+.metric:first-child{border-left:0;padding-left:0}
+.metric b{display:block;font-family:var(--disp);font-size:54px;letter-spacing:-.04em;line-height:1}
+.metric span{font-family:var(--mono);font-size:13px;color:var(--ink2);display:block;margin-top:8px}
+@media(max-width:780px){.metrics__in{grid-template-columns:1fr;gap:30px}.metric{border-left:0;border-top:1px solid var(--line);padding:24px 0 0}.metric:first-child{border-top:0;padding-top:0}}
+.sec{padding:96px 0}
+.sec__head{max-width:620px;margin-bottom:48px}
+.sec__head h2{font-size:clamp(30px,4vw,44px);margin:14px 0 0}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.feat__c{background:#fff;padding:30px 26px}
+.feat__c::before{content:"";display:block;width:34px;height:3px;background:var(--coral);margin-bottom:18px}
+.feat__c .ic{font-size:24px;margin-bottom:12px;color:var(--violet)}
+.feat__c h3{font-size:19px;letter-spacing:-.02em;margin-bottom:8px}
+.feat__c p{font-size:14.5px;color:var(--ink2)}
+@media(max-width:880px){.feat{grid-template-columns:1fr}}
+.band{background:var(--soft);border-block:1px solid var(--line)}
+.band__in{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:80px 0}
+.band__media{border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:5/4}
+.band__media img{width:100%;height:100%;object-fit:cover}
+.band h2{font-size:clamp(28px,3.4vw,38px);margin-bottom:18px}
+.band p{color:var(--ink2);font-size:17px;margin-bottom:22px}
+.checks{list-style:none;display:flex;flex-direction:column;gap:13px}
+.checks li{display:flex;gap:12px;align-items:flex-start;font-weight:500}
+.checks li::before{content:"→";font-family:var(--mono);color:var(--violet);font-weight:600}
+@media(max-width:880px){.band__in{grid-template-columns:1fr;gap:36px;padding:56px 0}}
+.quote{padding:100px 0;text-align:center}
+.quote blockquote{font-family:var(--disp);font-weight:500;font-size:clamp(26px,3.6vw,40px);line-height:1.25;letter-spacing:-.02em;max-width:18em;margin:0 auto 26px}
+.quote cite{font-family:var(--mono);font-size:13px;color:var(--ink2);font-style:normal}
+.cta{position:relative;background:var(--violet-d);color:#fff;overflow:hidden}
+.cta::before{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);
+  background-size:46px 46px}
+.cta__in{position:relative;text-align:center;padding:96px 0}
+.cta h2{color:#fff;font-size:clamp(30px,4vw,48px);margin-bottom:18px}
+.cta p{color:#cfcbff;font-size:18px;margin-bottom:30px}
+.cta .btn-pri{background:#fff;color:var(--violet-d)}
+.cta .btn-pri:hover{background:#f0eeff}
+.foot{background:#0d0e1a;color:#fff;padding:64px 0 30px}
+.foot__top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
+.foot__brand{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:700;font-size:20px}
+.foot__brand b{width:22px;height:22px;background:var(--violet);transform:rotate(45deg);border-radius:5px}
+.foot__brand+p{color:#8a8ca6;font-size:14px;margin-top:14px;max-width:26ch}
+.foot h4{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#6f7190;margin-bottom:16px}
+.foot a{display:block;color:#c3c5db;font-size:14px;margin-bottom:10px}
+.foot a:hover{color:#fff}
+.foot__bot{margin-top:48px;padding-top:22px;border-top:1px solid #20223a;font-family:var(--mono);font-size:12px;color:#6f7190}
+@media(max-width:780px){.foot__top{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
 
-.ahero{padding-block:clamp(3rem,6vw,5rem)}
-.ahero__in{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,4vw,3.5rem);align-items:center}
-.ahero .eyebrow{display:inline-block;margin-bottom:1rem}
-.ahero h1{font-size:clamp(2.5rem,5vw,4.2rem)}.ahero h1 .serif{font-weight:400}
-.ahero p{color:var(--ink-soft);font-size:1.12rem;margin:1.2rem 0 1.8rem;max-width:46ch}
-.ahero__cta{display:flex;gap:.8rem;flex-wrap:wrap}.ahero__note{margin-top:1rem;font-size:.84rem;color:var(--ink-soft)}
-.ashot{border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 70px -30px rgba(0,0,0,.4);background:var(--card)}
-.ashot__bar{display:flex;gap:.4rem;padding:.7rem .9rem;border-bottom:1px solid var(--line)}
-.ashot__bar i{width:10px;height:10px;border-radius:50%;background:#d9d9d9}
-.ashot__body{display:grid;grid-template-columns:120px 1fr;min-height:300px}
-.ashot__side{background:var(--brand);padding:1rem}.ashot__side b{color:#fff;font-size:.85rem;font-weight:800}
-.ashot__nav{display:flex;flex-direction:column;gap:.3rem;margin-top:1rem}.ashot__nav span{color:rgba(255,255,255,.7);font-size:.74rem;padding:.35rem .5rem;border-radius:6px}.ashot__nav span.on{background:rgba(255,255,255,.16);color:#fff}
-.ashot__main{padding:1.2rem}.ashot__cards{display:flex;gap:.7rem;margin-bottom:1rem}
-.ashot__c{flex:1;background:color-mix(in srgb,var(--paper) 60%,#fff);border:1px solid var(--line);border-radius:10px;padding:.7rem}.ashot__c b{display:block;font-size:1.3rem;font-weight:800}.ashot__c small{font-size:.68rem;color:var(--ink-soft)}
-.ashot__chart{background:color-mix(in srgb,var(--paper) 60%,#fff);border:1px solid var(--line);border-radius:10px;height:130px;padding:.8rem;display:flex;align-items:flex-end;gap:.35rem}
-.ashot__chart b{flex:1;background:linear-gradient(180deg,var(--brand),color-mix(in srgb,var(--brand) 45%,#fff));border-radius:4px 4px 0 0}
-.logos{padding-block:2.2rem;border-block:1px solid var(--line);text-align:center}
-.logos p{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:600;margin-bottom:1.2rem}
-.logos__r{display:flex;flex-wrap:wrap;justify-content:center;gap:2.6rem}.logos__r span{font-weight:800;font-size:1.2rem;color:color-mix(in srgb,var(--ink) 32%,var(--paper))}
-.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
-.fcard{border:1px solid var(--line);border-radius:18px;padding:1.8rem;background:var(--card)}
-.fcard .ic{width:46px;height:46px;border-radius:12px;background:var(--accent-soft);color:var(--brand);display:grid;place-items:center;font-size:1.25rem;margin-bottom:.9rem}
-.fcard h3{font-size:1.12rem;margin-bottom:.4rem}.fcard p{color:var(--ink-soft);font-size:.93rem}
-.band{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:center;padding-block:clamp(3rem,6vw,5rem)}
-.band__m{border-radius:18px;overflow:hidden;aspect-ratio:4/3}.band__m img{width:100%;height:100%;object-fit:cover}
-.band__t h2{font-size:clamp(1.7rem,3.2vw,2.4rem);margin-bottom:1rem}.band__t h2 .serif{font-weight:400}.band__t p{color:var(--ink-soft);font-size:1.05rem;margin-bottom:1.2rem}
-.band__t ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}.band__t li{display:flex;gap:.6rem}.band__t li::before{content:'✓';color:var(--brand);font-weight:800}
-.acta{background:var(--shell);color:#fff;border-radius:22px;padding:clamp(2.5rem,6vw,4rem);text-align:center;margin-block:clamp(2.5rem,5vw,3.5rem)}
-.acta h2{color:#fff;font-size:clamp(1.9rem,4vw,2.8rem);margin-bottom:1rem}.acta h2 .serif{font-weight:400}.acta p{opacity:.82;margin-bottom:1.6rem}
-@media(max-width:860px){.ahero__in{grid-template-columns:1fr}.fgrid{grid-template-columns:1fr}.band{grid-template-columns:1fr}}
-</style></head><body><header class="nav"><div class="wrap nav__in"><a class="brand" href="#"><span class="brand__dot">L</span> Lumen</a><nav class="nav__links"><a href="#">Product</a><a href="#">Solutions</a><a href="#">Pricing</a><a href="#">Docs</a></nav><a class="btn btn--primary" href="#">Start free</a></div></header>
-<section class="ahero wrap"><div class="ahero__in"><div><span class="eyebrow">✨ New: AI insights for every funnel</span><h1>The analytics layer your <span class="serif">whole team</span> understands</h1><p>Lumen turns scattered product data into clear answers — funnels, retention, and AI insights anyone on the team can read.</p><div class="ahero__cta"><a class="btn btn--primary" href="#">Start free</a><a class="btn btn--ghost" href="#">▶ Watch demo</a></div><p class="ahero__note">No card required · 14-day Pro trial</p></div>
-<div class="ashot"><div class="ashot__bar"><i></i><i></i><i></i></div><div class="ashot__body"><aside class="ashot__side"><b>Lumen</b><div class="ashot__nav"><span class="on">📊 Overview</span><span>🔻 Funnels</span><span>🔁 Retention</span><span>✨ Insights</span><span>⚙ Settings</span></div></aside><main class="ashot__main"><div class="ashot__cards"><div class="ashot__c"><small>Active users</small><b>48.2k</b></div><div class="ashot__c"><small>Conversion</small><b>6.4%</b></div><div class="ashot__c"><small>Retention</small><b>71%</b></div></div><div class="ashot__chart"><b style="height:52%"></b><b style="height:64%"></b><b style="height:58%"></b><b style="height:78%"></b><b style="height:70%"></b><b style="height:88%"></b><b style="height:80%"></b><b style="height:96%"></b></div></main></div></div></div></section>
-<section class="logos"><div class="wrap"><p>Trusted by product teams at</p><div class="logos__r"><span>Linear</span><span>Vercel</span><span>Notion</span><span>Ramp</span><span>Loom</span><span>Figma</span></div></div></section>
-<section><div class="wrap"><div class="stats__grid"><div class="stat"><b>48k+</b><span>Teams</span></div><div class="stat"><b>2.4B</b><span>Events / day</span></div><div class="stat"><b>99.99%</b><span>Uptime</span></div><div class="stat"><b>4.9★</b><span>G2 rating</span></div></div></div></section>
-<section class="wrap"><div class="shead"><span class="eyebrow">Everything in one place</span><h2>Answers, not just <span class="serif">dashboards</span></h2><p>Lumen connects your product data and surfaces what changed, why, and what to do next.</p></div><div class="fgrid"><div class="fcard"><div class="ic">🔻</div><h3>Funnels</h3><p>See exactly where users drop off, then fix it — no SQL required.</p></div><div class="fcard"><div class="ic">🔁</div><h3>Retention</h3><p>Cohort retention curves that reveal what makes users stick.</p></div><div class="fcard"><div class="ic">✨</div><h3>AI insights</h3><p>Plain-English explanations of every spike, dip, and anomaly.</p></div><div class="fcard"><div class="ic">🧭</div><h3>Journeys</h3><p>Follow real user paths through your product, step by step.</p></div><div class="fcard"><div class="ic">🔔</div><h3>Smart alerts</h3><p>Get pinged the moment a key metric moves — before it's a problem.</p></div><div class="fcard"><div class="ic">🔗</div><h3>50+ integrations</h3><p>Pipe in data from your stack in minutes, not weeks.</p></div></div></section>
-<section class="wrap"><div class="band"><div class="band__m"><img src="img/01.jpg" alt=""></div><div class="band__t"><span class="eyebrow">Built for everyone</span><h2>Data the <span class="serif">whole team</span> can read</h2><p>No more waiting on the data team. Lumen is clear enough for PMs, marketers, and founders to answer their own questions.</p><ul><li>Self-serve, no SQL</li><li>Shareable reports</li><li>Role-based access</li></ul></div></div></section>
-<section><div class="wrap"><div class="shead"><span class="eyebrow">Loved by teams</span><h2>Why teams <span class="serif">switch</span> to Lumen</h2></div><div class="tgrid"><article class="tcard"><div class="tcard__s">★★★★★</div><p class="tcard__q">"We cut our time-to-insight from days to minutes. Everyone uses it now."</p><div class="tcard__by"><span class="tcard__av">M</span><div><b>Maya Chen</b><span>Head of Product, Linear</span></div></div></article><article class="tcard"><div class="tcard__s">★★★★★</div><p class="tcard__q">"Finally, analytics our marketing team actually opens on their own."</p><div class="tcard__by"><span class="tcard__av">T</span><div><b>Tom Alvarez</b><span>Growth, Ramp</span></div></div></article><article class="tcard"><div class="tcard__s">★★★★★</div><p class="tcard__q">"The AI insights caught a churn issue we'd have missed for weeks."</p><div class="tcard__by"><span class="tcard__av">P</span><div><b>Priya Nair</b><span>PM, Notion</span></div></div></article></div></div></section>
-<section class="wrap"><div class="acta"><h2>Start free, <span class="serif">scale</span> when you grow</h2><p>Generous free tier. Upgrade only when your data does.</p><a class="btn btn--light" href="#">Start free</a></div></section>
-<footer class="foot"><div class="wrap"><div class="foot__top"><div class="foot__brand"><a class="brand" href="#" style="color:#fff"><span class="brand__dot">L</span> Lumen</a><p>The analytics layer your whole team understands.</p></div><div class="foot__col"><h4>Product</h4><a href="#">Funnels</a><a href="#">Retention</a><a href="#">Insights</a><a href="#">Integrations</a></div><div class="foot__col"><h4>Solutions</h4><a href="#">Product</a><a href="#">Growth</a><a href="#">Marketing</a><a href="#">Founders</a></div><div class="foot__col"><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Blog</a><a href="#">Contact</a></div></div><div class="foot__bot">© 2026 Lumen. All rights reserved.</div></div></footer></body></html>
+<header class="nav"><div class="wrap nav__in">
+  <a class="logo" href="#"><b></b>Lumen</a>
+  <nav class="nav__links"><a href="#">Product</a><a href="#">Customers</a><a href="#">Docs</a><a href="#">Pricing</a></nav>
+  <div class="nav__right"><a class="btn-ghost" href="#">Sign in</a><a class="btn btn-pri" href="#">Start free →</a></div>
+</div></header>
+
+<section class="hero"><div class="hero__blob"></div><div class="wrap hero__in">
+  <div>
+    <span class="tag">// product analytics</span>
+    <h1>The analytics layer your <em>whole team</em> actually reads.</h1>
+    <p>Lumen turns scattered product data into clear answers — funnels, retention, and AI insights anyone can understand. No SQL required.</p>
+    <div class="hero__cta"><a class="btn btn-pri" href="#">Start free →</a><a class="btn btn-sec" href="#">▶ Watch 2-min demo</a></div>
+    <p class="hero__note">$ no credit card · 14-day Pro trial · SOC 2 Type II</p>
+    <div class="hero__logos"><span>Trusted by 4,800+ product teams</span>
+      <div><span>Linear</span><span>Vercel</span><span>Notion</span><span>Ramp</span><span>Loom</span></div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel__bar"><i></i><i></i><i></i><span>app.lumen.io/overview</span></div>
+    <div class="panel__body">
+      <div class="kpi-label">Weekly active users</div>
+      <div class="kpi"><b>48,210</b><em>▲ 12.4%</em></div>
+      <svg class="spark" viewBox="0 0 320 64" preserveAspectRatio="none">
+        <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4f46e5" stop-opacity=".28"/><stop offset="1" stop-color="#4f46e5" stop-opacity="0"/></linearGradient></defs>
+        <path d="M0,52 L40,46 L80,50 L120,34 L160,38 L200,22 L240,28 L280,12 L320,8" fill="none" stroke="#4f46e5" stroke-width="2.5"/>
+        <path d="M0,52 L40,46 L80,50 L120,34 L160,38 L200,22 L240,28 L280,12 L320,8 L320,64 L0,64 Z" fill="url(#g)"/>
+      </svg>
+      <div class="kpi-label" style="margin-bottom:12px">Activation funnel</div>
+      <div class="funnel">
+        <div class="frow">Signed up<b style="width:96%"></b></div>
+        <div class="frow">Created project<b style="width:74%;opacity:.85"></b></div>
+        <div class="frow">Invited a teammate<b style="width:51%;opacity:.7"></b></div>
+        <div class="frow">Activated<b style="width:38%;opacity:.55"></b></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="metrics"><div class="wrap metrics__in">
+  <div class="metric"><b>2.4B</b><span>events ingested / day</span></div>
+  <div class="metric"><b>99.99%</b><span>measured uptime (90d)</span></div>
+  <div class="metric"><b>11 min</b><span>median time-to-first-insight</span></div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec__head"><span class="tag">// the toolkit</span><h2>Answers, not just dashboards.</h2></div>
+  <div class="feat">
+    <div class="feat__c"><div class="ic">⌖</div><h3>Funnels</h3><p>See exactly where users drop off, then fix it — build a funnel in seconds, no query language.</p></div>
+    <div class="feat__c"><div class="ic">↻</div><h3>Retention</h3><p>Cohort curves that reveal what actually makes users stick around week over week.</p></div>
+    <div class="feat__c"><div class="ic">✷</div><h3>AI insights</h3><p>Plain-English explanations of every spike, dip, and anomaly — delivered before you ask.</p></div>
+    <div class="feat__c"><div class="ic">⇄</div><h3>Journeys</h3><p>Follow real paths through your product, step by step, to understand intent.</p></div>
+    <div class="feat__c"><div class="ic">⚲</div><h3>Smart alerts</h3><p>Get pinged the moment a key metric moves — in Slack, before it becomes a problem.</p></div>
+    <div class="feat__c"><div class="ic">⧉</div><h3>50+ integrations</h3><p>Pipe in data from your whole stack in minutes — warehouses, CDPs, and SDKs.</p></div>
+  </div>
+</div></section>
+
+<section class="band"><div class="wrap band__in">
+  <div class="band__media"><img src="img/01.jpg" alt="Product team collaborating"></div>
+  <div>
+    <span class="tag">// built for everyone</span>
+    <h2>Self-serve data the whole team can read.</h2>
+    <p>No more waiting on the data team. Lumen is clear enough for PMs, marketers, and founders to answer their own questions — and trustworthy enough for analysts.</p>
+    <ul class="checks">
+      <li>Ask in plain English, get a chart back</li>
+      <li>Shareable reports &amp; live dashboards</li>
+      <li>Role-based access and audit logs</li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="quote"><div class="wrap">
+  <blockquote>“We cut time-to-insight from days to minutes. Now everyone on the team opens Lumen on their own.”</blockquote>
+  <cite>— Maya Chen · Head of Product, Linear</cite>
+</div></section>
+
+<section class="cta"><div class="wrap cta__in">
+  <h2>Start measuring what matters.</h2>
+  <p>Free for your first 1M events a month. Upgrade only when your data does.</p>
+  <a class="btn btn-pri" href="#">Start free →</a>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <div class="foot__top">
+    <div><div class="foot__brand"><b></b>Lumen</div><p>The analytics layer your whole team understands.</p></div>
+    <div><h4>Product</h4><a href="#">Funnels</a><a href="#">Retention</a><a href="#">AI insights</a><a href="#">Integrations</a></div>
+    <div><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Blog</a><a href="#">Contact</a></div>
+    <div><h4>Resources</h4><a href="#">Docs</a><a href="#">Changelog</a><a href="#">Status</a><a href="#">Security</a></div>
+  </div>
+  <div class="foot__bot">© 2026 Lumen Analytics, Inc. — built by Nexen Labz</div>
+</div></footer>
+
+</body>
+</html>

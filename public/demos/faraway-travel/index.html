@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Faraway — Slow travel, told well</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;1,6..96,500&family=Jost:wght@300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;1,6..96,500&family=Jost:wght@300;400;500&display=swap"></noscript>
+<style>
+:root{--ink:#1d2526;--ink2:#5f6c6d;--ocean:#1b6f74;--ocean-d:#125054;--terra:#c2683e;--cream:#f3efe6;--paper:#faf7f0;--card:#fff;--line:#e4ddcd;--gold:#b8924a;
+  --disp:'Bodoni Moda',Georgia,serif;--body:'Jost',system-ui,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}html,body{overflow-x:hidden}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.7;font-weight:400;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:26px}
+h1,h2,h3{font-family:var(--disp);line-height:1.14;font-weight:500}
+.ey{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--terra);font-weight:500}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:500;font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:14px 30px;cursor:pointer;border:1px solid var(--ink);transition:.2s;background:transparent;color:var(--ink)}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.nav{position:absolute;top:0;left:0;right:0;z-index:50}
+.nav__in{display:flex;align-items:center;height:84px;color:#fff}
+.logo{font-family:var(--disp);font-size:26px;font-weight:500;letter-spacing:.04em}
+.nav__links{margin-left:48px;display:flex;gap:30px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.nav__links a:hover{color:#fff}
+.nav__right{margin-left:auto;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+@media(max-width:900px){.nav__links{display:none}}
+/* hero */
+.hero{position:relative;color:#fff;min-height:92vh;display:flex;align-items:flex-end}
+.hero__bg{position:absolute;inset:0;background:url('img/01.jpg') center/cover}
+.hero__bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(29,37,38,.35) 30%,rgba(29,37,38,.82))}
+.hero__in{position:relative;padding:0 0 60px;max-width:760px}
+.hero .ey{color:var(--gold)}
+.hero h1{font-size:clamp(46px,8vw,92px);font-weight:500;margin:16px 0 18px}
+.hero h1 em{font-style:italic}
+.hero p{font-size:18px;opacity:.92;max-width:42ch;margin-bottom:20px;font-weight:300}
+.hero .meta{font-size:13px;opacity:.8;letter-spacing:.04em}
+/* dispatches */
+.sec{padding:84px 0}
+.sec__head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;flex-wrap:wrap;gap:14px}
+.sec__head h2{font-size:clamp(30px,4.4vw,48px)}
+.sec__head h2 em{font-style:italic;color:var(--terra)}
+.disp{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.d__img{aspect-ratio:4/5;overflow:hidden;margin-bottom:16px}
+.d__img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.d:hover .d__img img{transform:scale(1.04)}
+.d .place{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ocean-d);font-weight:500}
+.d h3{font-family:var(--disp);font-size:24px;font-weight:500;margin:5px 0 8px}
+.d h3 a:hover{color:var(--terra)}
+.d p{font-size:14.5px;color:var(--ink2);font-weight:300}
+@media(max-width:880px){.disp{grid-template-columns:1fr;gap:34px}}
+/* feature */
+.feat{background:var(--ocean);color:#fff;border-block:1px solid var(--line)}
+.feat__in{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
+.feat__media{overflow:hidden;min-height:420px}.feat__media img{width:100%;height:100%;object-fit:cover}
+.feat__t{padding:70px 56px;display:flex;flex-direction:column;justify-content:center}
+.feat__t .ey{color:#a8e0d8}
+.feat__t h2{color:#fff;font-size:clamp(30px,4vw,48px);margin:14px 0 16px}
+.feat__t h2 em{font-style:italic}
+.feat__t p{color:rgba(255,255,255,.82);font-size:16px;margin-bottom:20px;font-weight:300}
+.feat__t .btn{border-color:#fff;color:#fff;align-self:flex-start}.feat__t .btn:hover{background:#fff;color:var(--ocean-d)}
+@media(max-width:880px){.feat__in{grid-template-columns:1fr}.feat__media{min-height:280px}.feat__t{padding:46px 30px}}
+/* guides strip */
+.guides{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.g{position:relative;aspect-ratio:1;overflow:hidden;display:flex;align-items:flex-end;color:#fff}
+.g img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.g::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(29,37,38,.7))}
+.g b{position:relative;font-family:var(--disp);font-style:italic;font-size:19px;font-weight:500;padding:16px}
+@media(max-width:760px){.guides{grid-template-columns:1fr 1fr}}
+/* newsletter */
+.news{text-align:center;padding:90px 0}
+.news h2{font-size:clamp(30px,4.2vw,50px);font-weight:500;margin-bottom:12px}
+.news h2 em{font-style:italic;color:var(--terra)}
+.news p{color:var(--ink2);font-size:17px;margin-bottom:24px;font-weight:300}
+.news form{display:flex;gap:8px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.news input{flex:1;min-width:200px;padding:13px 14px;border:1px solid var(--line);border-radius:0;font:inherit;font-size:14px;background:var(--card)}
+/* footer */
+.foot{background:var(--ink);color:#fff;padding:54px 0 30px}
+.foot__top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px}
+.foot__top .logo{color:#fff}
+.foot__cols{display:flex;gap:50px;flex-wrap:wrap}
+.foot__cols h4{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:13px}
+.foot__cols a{display:block;font-size:14px;margin-bottom:8px;opacity:.82;font-weight:300}.foot__cols a:hover{opacity:1}
+.foot__bot{margin-top:38px;font-size:12.5px;opacity:.55}
+@media(max-width:680px){.foot__top{flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap nav__in">
+  <a class="logo" href="#">Faraway</a>
+  <nav class="nav__links"><a href="#">Dispatches</a><a href="#">Guides</a><a href="#">Photos</a><a href="#">About</a></nav>
+  <div class="nav__right"><a href="#">Subscribe</a></div>
+</div></header>
+
+<section class="hero"><div class="hero__bg"></div><div class="wrap hero__in">
+  <span class="ey">Dispatch № 54 · Lisbon, Portugal</span>
+  <h1>Slow travel, <em>told well.</em></h1>
+  <p>Faraway is a travel journal of long stays, small places, and the stories you only find when you stop rushing.</p>
+  <p class="meta">By the editors · Twice a month · Free to read</p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec__head"><h2>Recent <em>dispatches</em></h2><a class="ey" href="#">All dispatches →</a></div>
+  <div class="disp">
+    <article class="d"><div class="d__img"><img src="img/02.jpg" alt=""></div><span class="place">Kyoto, Japan</span><h3><a href="#">The tea house at the end of the lane</a></h3><p>A month of mornings spent learning to do one small thing very well.</p></article>
+    <article class="d"><div class="d__img"><img src="img/03.jpg" alt=""></div><span class="place">Oaxaca, Mexico</span><h3><a href="#">Everything I know, I learned at the market</a></h3><p>On mezcal, mole, and the slow art of being a regular somewhere new.</p></article>
+    <article class="d"><div class="d__img"><img src="img/04.jpg" alt=""></div><span class="place">The Highlands, Scotland</span><h3><a href="#">Walking until the map ran out</a></h3><p>Seven days, one path, and the particular silence of very old hills.</p></article>
+  </div>
+</div></section>
+
+<section class="feat"><div class="feat__in">
+  <div class="feat__media"><img src="img/05.jpg" alt="Featured journey"></div>
+  <div class="feat__t">
+    <span class="ey">The long read</span>
+    <h2>A year of <em>living elsewhere.</em></h2>
+    <p>What twelve months of staying — really staying — in twelve different towns taught us about home, belonging, and the myth of the perfect place.</p>
+    <a class="btn" href="#">Read the series</a>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec__head"><h2>Where to <em>next?</em></h2></div>
+  <div class="guides">
+    <div class="g"><img src="img/06.jpg" alt=""><b>Portugal</b></div>
+    <div class="g"><img src="img/01.jpg" alt=""><b>Japan</b></div>
+    <div class="g"><img src="img/03.jpg" alt=""><b>Mexico</b></div>
+    <div class="g"><img src="img/04.jpg" alt=""><b>Scotland</b></div>
+  </div>
+</div></section>
+
+<section class="news"><div class="wrap">
+  <span class="ey">The dispatch</span>
+  <h2 style="margin-top:10px">Postcards from the <em>road,</em> twice a month.</h2>
+  <p>Join 38,000 readers getting our latest dispatch, guides, and photos. No spam, ever.</p>
+  <form onsubmit="return false"><input type="email" placeholder="you@email.com"><button class="btn">Subscribe</button></form>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <div class="foot__top">
+    <a class="logo" href="#">Faraway</a>
+    <div class="foot__cols">
+      <div><h4>Read</h4><a href="#">Dispatches</a><a href="#">Guides</a><a href="#">Photos</a><a href="#">Archive</a></div>
+      <div><h4>About</h4><a href="#">The journal</a><a href="#">Newsletter</a><a href="#">Contact</a><a href="#">Ethics</a></div>
+      <div><h4>Follow</h4><a href="#">Instagram</a><a href="#">Substack</a><a href="#">RSS</a><a href="#">Pinterest</a></div>
+    </div>
+  </div>
+  <div class="foot__bot">© 2026 Faraway — built by Nexen Labz. A travel journal of slow, well-told stories.</div>
+</div></footer>
+</body>
+</html>
