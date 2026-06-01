@@ -24,6 +24,13 @@ export default function Testimonials({ items, label = "Kind Words", heading = "T
       <div className="testimonial-stage">
         {items.map((t, i) => (
           <div key={t._id} className={`testimonial ${i === idx ? "testimonial--active" : ""}`}>
+            {t.rating ? (
+              <div className="testimonial__rating" aria-label={`Rated ${t.rating} out of 5`}>
+                {Array.from({ length: 5 }).map((_, s) => (
+                  <span key={s} aria-hidden="true" className={s < t.rating ? "is-on" : ""}>★</span>
+                ))}
+              </div>
+            ) : null}
             <blockquote className="testimonial__quote">
               <span style={{ color: "var(--accent)" }}>&ldquo;</span>
               {t.quote}
@@ -33,8 +40,12 @@ export default function Testimonials({ items, label = "Kind Words", heading = "T
               <div className="testimonial__avatar">{(t.author || "").trim().charAt(0).toUpperCase()}</div>
               <div>
                 <div style={{ color: "var(--text-1)", fontSize: 15, fontWeight: 500 }}>{t.author}</div>
-                {t.company && (
-                  <div className="mono" style={{ color: "var(--text-3)", fontSize: 11, marginTop: 2 }}>{t.company}</div>
+                {(t.company || t.source) && (
+                  <div className="mono" style={{ color: "var(--text-3)", fontSize: 11, marginTop: 2 }}>
+                    {t.company}
+                    {t.company && t.source ? " · " : ""}
+                    {t.source ? `via ${t.source}` : ""}
+                  </div>
                 )}
               </div>
             </div>
