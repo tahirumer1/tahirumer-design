@@ -84,17 +84,21 @@ export default async function CaseStudyPage({ params }) {
       )}
 
       {p.detailImageUrls?.length > 0 && (
+        /* No <R> reveal wrapper here: a tall stacked case study exceeds the
+           IntersectionObserver threshold and would never un-hide. Lazy loading
+           gives the progressive reveal instead. */
         <div className="cs-shots">
           {p.detailImageUrls.map((url, i) => (
-            <R key={i}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`${url}?w=1600&auto=format&fit=max`}
-                alt={`${p.title} — image ${i + 1}`}
-                className="cs-shot"
-                loading="lazy"
-              />
-            </R>
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              key={i}
+              src={url}
+              alt={`${p.title} — image ${i + 1}`}
+              className="cs-shot"
+              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
+              fetchPriority={i === 0 ? "high" : "auto"}
+            />
           ))}
         </div>
       )}
