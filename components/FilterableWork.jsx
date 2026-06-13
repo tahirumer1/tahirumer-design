@@ -9,19 +9,24 @@ const CATEGORIES = ["All", "UI/UX", "Graphic", "Development"];
 const CAT_TO_SLUG = { "All": "", "UI/UX": "ui-ux", "Graphic": "graphic", "Development": "development" };
 const SLUG_TO_CAT = { "ui-ux": "UI/UX", "graphic": "Graphic", "development": "Development", "all": "All" };
 
-export default function FilterableWork({ projects, showCounts = false, limit, emptyMessage = "No projects in this category yet — check back soon.", syncUrl = false }) {
+export default function FilterableWork({ projects, showCounts = false, limit, pageSize, emptyMessage = "No projects in this category yet — check back soon.", syncUrl = false }) {
   const [cat, setCat] = useState("All");
+  // Archive pagination: render `pageSize` cards, reveal more on "Load more".
+  // Keeps the initial DOM (and its 55 IntersectionObservers) small so the page
+  // stays snappy. `limit` (homepage) is a separate, fixed cap — not paginated.
+  const [visible, setVisible] = useState(pageSize || Infinity);
 
   // Honor a ?cat= deep link on load so each field of work has a shareable URL.
   useEffect(() => {
     if (!syncUrl || typeof window === "undefined") return;
     const slug = new URLSearchParams(window.location.search).get("cat");
     const c = slug && SLUG_TO_CAT[slug.toLowerCase()];
-    if (c) setCat(c);
-  }, [syncUrl]);
+    if (c) { setCat(c); setVisible(pageSize || Infinity); }
+  }, [syncUrl, pageSize]);
 
   const choose = (c) => {
     setCat(c);
+    setVisible(pageSize || Infinity); // restart pagination when the filter changes
     if (!syncUrl || typeof window === "undefined") return;
     const url = new URL(window.location.href);
     const slug = CAT_TO_SLUG[c];
@@ -32,7 +37,8 @@ export default function FilterableWork({ projects, showCounts = false, limit, em
 
   const inCat = cat === "All" ? projects : projects.filter((p) => p.category === cat);
   const totalInCat = inCat.length;
-  const filtered = limit ? inCat.slice(0, limit) : inCat;
+  const filtered = limit ? inCat.slice(0, limit) : pageSize ? inCat.slice(0, visible) : inCat;
+  const remaining = totalInCat - filtered.length;
 
   return (
     <>
@@ -63,7 +69,7 @@ export default function FilterableWork({ projects, showCounts = false, limit, em
               <ProjectCard key={p._id || p.slug} project={p} index={i} />
             ))}
           </div>
-          {limit && (
+          {limit ? (
             <div className="work-viewall">
               <Link
                 href={`/work${CAT_TO_SLUG[cat] ? `?cat=${CAT_TO_SLUG[cat]}` : ""}`}
@@ -74,7 +80,20 @@ export default function FilterableWork({ projects, showCounts = false, limit, em
                 <span aria-hidden="true"> →</span>
               </Link>
             </div>
-          )}
+          ) : pageSize && remaining > 0 ? (
+            <div className="work-viewall">
+              <button
+                type="button"
+                onClick={() => setVisible((v) => v + pageSize)}
+                className="work-viewall__link mono"
+                data-cursor=""
+              >
+                Load more
+                <span className="filter-btn__count">({remaining} more)</span>
+                <span aria-hidden="true"> ↓</span>
+              </button>
+            </div>
+          ) : null}
         </>
       )}
     </>

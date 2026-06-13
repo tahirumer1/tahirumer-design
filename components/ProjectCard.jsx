@@ -20,7 +20,9 @@ export default function ProjectCard({ project, index = 0 }) {
       style={{
         opacity: vis ? 1 : 0,
         transform: vis ? "translateY(0)" : "translateY(50px)",
-        transition: `opacity 0.9s cubic-bezier(0.22,1,0.36,1) ${0.08 * index}s, transform 0.9s cubic-bezier(0.22,1,0.36,1) ${0.08 * index}s`,
+        // Cap the stagger so cards deep in a long/paginated grid don't wait
+        // seconds to animate in (index 50 would otherwise delay ~4s).
+        transition: (() => { const d = Math.min(index, 9) * 0.05; return `opacity 0.9s cubic-bezier(0.22,1,0.36,1) ${d}s, transform 0.9s cubic-bezier(0.22,1,0.36,1) ${d}s`; })(),
       }}
     >
       <Link href={`/work/${project.slug}`} className="proj-card" data-cursor="view">
