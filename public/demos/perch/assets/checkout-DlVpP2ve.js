@@ -1,4 +1,4 @@
-import{a as e,i as t,l as n,m as r,o as i,r as a,s as o,w as s}from"./shell-DV6JbPcv.js";n({page:`checkout`});var c=75,l={standard:{label:`Standard`,sub:`3–5 working days`,price:0},express:{label:`Express`,sub:`Next working day`,price:12}},u=`standard`,d=document.getElementById(`checkout`),f=()=>{let e=a(),n=t(),r=u===`express`?l.express.price:n>=c?0:8;return`
+import{a as e,i as t,l as n,m as r,o as i,r as a,s as o,w as s}from"./shell-CsP8Yqvb.js";n({page:`checkout`});var c=75,l={standard:{label:`Standard`,sub:`3–5 working days`,price:0},express:{label:`Express`,sub:`Next working day`,price:12}},u=`standard`,d=document.getElementById(`checkout`),f=()=>{let e=a(),n=t(),r=u===`express`?l.express.price:n>=c?0:8;return`
     <aside class="summary">
       <h2>Order</h2>
       ${e.map(e=>`
