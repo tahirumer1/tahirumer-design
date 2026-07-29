@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shop — perch</title>
+  <meta name="description" content="Browse the perch catalogue by category, filter by product type and sort by price or rating." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="fonts/inter.css" />
+  <link rel="stylesheet" href="fonts/instrument.css" />
+  <script type="module" crossorigin src="./assets/category-Dx_zVALT.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/shell-DV6JbPcv.js">
+  <link rel="stylesheet" crossorigin href="./assets/shell-BvVLUs4-.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="rail" aria-label="Primary"></aside>
+    <div class="page">
+      <header class="hdr"></header>
+      <main>
+        <nav class="crumbs" id="crumbs" aria-label="Breadcrumb"></nav>
+        <div class="phead">
+          <h1 class="phead__title" id="cat-title">Shop</h1>
+          <p class="phead__sub" id="cat-sub"></p>
+        </div>
+        <div class="cat-bar">
+          <div class="cat-bar__filters" id="filters"></div>
+          <div class="cat-bar__right">
+            <span class="cat-bar__count" id="count"></span>
+            <span class="select">
+              <label class="sr-only" for="sort">Sort by</label>
+              <select id="sort">
+                <option value="featured">Featured</option>
+                <option value="price-asc">Price: low to high</option>
+                <option value="price-desc">Price: high to low</option>
+                <option value="rating">Top rated</option>
+              </select>
+              <svg aria-hidden="true"><use href="#i-chevron" /></svg>
+            </span>
+          </div>
+        </div>
+        <div id="results" data-reveal-group></div>
+      </main>
+      <footer class="foot"></footer>
+    </div>
+  </div>
+  <aside class="cookie" id="cookie" aria-label="Cookie notice"></aside>
+</body>
+</html>
